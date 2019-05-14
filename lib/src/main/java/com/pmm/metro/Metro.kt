@@ -37,13 +37,12 @@ object Metro {
         }
 
         //增加全局 中转站
-        MetroMap.addTransferStation(object : TransferStation {
-            override fun transfer(path: String): String {
-                Logger.d("目的站=${path}")
-                return path
-            }
-
-        })
+//        MetroMap.addTransferStation(object : TransferStation {
+//            override fun transfer(path: String): String {
+//                Logger.d("目的站=${path}")
+//                return path
+//            }
+//        })
     }
 
 
