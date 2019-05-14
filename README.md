@@ -25,3 +25,16 @@ allprojects {
 implementation 'com.github.caoyanglee:Metro:{latestVersion}'
 
 ```
+
+## 用法
+1. 在Application初始化
+```kotlin  
+Metro.init(this)
+```
+2. 使用
+```kotlin
+Metro.with(this)
+    .path("/login")
+    .attribute("name", "你需要一台永动机")
+    .go()
+```
