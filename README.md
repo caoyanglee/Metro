@@ -27,11 +27,11 @@ implementation 'com.github.caoyanglee:Metro:{latestVersion}'
 ```
 
 ## 用法
-1. 在Application初始化
+**在Application初始化**
 ```kotlin  
 Metro.init(this)
 ```
-2. 使用
+**在Application初始化**
 ```kotlin
 Metro.with(this)
     .path("/login")
