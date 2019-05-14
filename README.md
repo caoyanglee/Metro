@@ -18,7 +18,7 @@ allprojects {
 }
 ```
 **app的build.gradle**
-[![](https://jitpack.io/v/caoyanglee/richEditText.svg)](https://jitpack.io/#caoyanglee/Metro)
+[![](https://jitpack.io/v/caoyanglee/Metro.svg)](https://jitpack.io/#caoyanglee/Metro)
 
 ```gradle
 
