@@ -19,6 +19,8 @@ class Ticket(private var path: String, private val driver: Driver) {
 
     private val Intent: Intent by lazy { Intent() }
     private var transferStation: TransferStation? = null//中转站
+    private var enterAnim = 0//进入动画
+    private var exitAnim = 0//退出动画
 
 
     fun attribute(name: String, value: Int) = this.apply {
@@ -141,6 +143,11 @@ class Ticket(private var path: String, private val driver: Driver) {
         this.transferStation = transferStation
     }
 
+    fun overridePendingTransition(enterAnim: Int, exitAnim: Int) = this.apply {
+        this.enterAnim = enterAnim
+        this.exitAnim = exitAnim
+    }
+
     //执行
     fun go(requestCode: Int = -1) {
         //做拦截操作 path识别切换
@@ -165,6 +172,8 @@ class Ticket(private var path: String, private val driver: Driver) {
                 } else {
                     activity.startActivity(Intent.setClass(activity, station.destination))
                 }
+                if (enterAnim != 0 || exitAnim != 0)
+                    activity.overridePendingTransition(enterAnim, exitAnim)
             }
             is FragmentDriver -> {
                 val fragment = driver.target
