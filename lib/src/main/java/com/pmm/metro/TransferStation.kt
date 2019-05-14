@@ -7,5 +7,5 @@ package com.pmm.metro
  */
 interface TransferStation {
 
-    fun transfer(path: String): String
+    fun transfer(ticket: Ticket): Ticket
 }

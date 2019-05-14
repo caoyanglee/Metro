@@ -2,15 +2,10 @@ package com.pmm.metro
 
 import android.app.Application
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import com.orhanobut.logger.Logger
-import com.pmm.metro.driver.Driver
-import com.pmm.metro.driver.DriverFactory
 import dalvik.system.DexFile
 import dalvik.system.PathClassLoader
 import java.io.IOException
-import java.util.HashMap
+import java.util.*
 
 
 /**
@@ -20,14 +15,7 @@ import java.util.HashMap
  */
 object Metro {
 
-    private val driverFactory by lazy { DriverFactory() }//司机工厂
-
-
-    fun with(target: FragmentActivity): Driver = driverFactory.getDriver(target)
-
-    fun with(target: Fragment): Driver = driverFactory.getDriver(target)
-
-    fun with(target: Context): Driver = driverFactory.getDriver(target)
+    fun with(target: Any): Train = Train(target)
 
     fun init(context: Application) {
         //扫描所有带Station的类

@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
         mTvJump.setOnClickListenerPro {
             Metro.with(this)
                 .path("/a")
-                .transfer(LoginTransferStation())
                 .attribute("name", "你需要一台永动机")
+                .addTransferStation(LoginTransferStation())
                 .go()
         }
     }

@@ -3,6 +3,7 @@ package com.pmm.metro.demo
 import com.orhanobut.logger.Logger
 import com.pmm.metro.Metro
 import com.pmm.metro.MetroMap
+import com.pmm.metro.Ticket
 import com.pmm.metro.TransferStation
 import com.weimu.universalview.OriginAppData
 
@@ -20,13 +21,14 @@ class Appdata : OriginAppData() {
 
         Metro.init(this)
 
+        //中转站
         MetroMap.addTransferStation(object : TransferStation {
-            override fun transfer(path: String): String {
-                Logger.d("目的站=${path}")
-                return path
+            override fun transfer(ticket: Ticket): Ticket {
+                Logger.d("目的站=${ticket.path}")
+                return ticket
             }
-
         })
+        //代码方式 增加站点
         MetroMap.addStation("/index", MainActivity::class.java)
 
     }

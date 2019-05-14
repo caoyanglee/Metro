@@ -14,7 +14,7 @@ object MetroMap {
 
     //查询车站
     fun findStation(path: String): StationMeta {
-        return stations[path] ?: throw IllegalArgumentException("no station be founded!")
+        return stations[path] ?: throw IllegalArgumentException("the path $path not be founded!")
     }
 
     //增加车站
@@ -47,6 +47,7 @@ object MetroMap {
         transferStations.add(transferStation)
     }
 
+    //获取中转站
     fun getTransferStation(): List<TransferStation> {
         return transferStations
     }

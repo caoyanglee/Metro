@@ -1,6 +1,7 @@
 package com.pmm.metro.demo
 
 import com.orhanobut.logger.Logger
+import com.pmm.metro.Ticket
 import com.pmm.metro.TransferStation
 
 /**
@@ -11,12 +12,14 @@ import com.pmm.metro.TransferStation
 class LoginTransferStation : TransferStation {
     private val isLogin = false
 
-    override fun transfer(path: String): String {
-        var newPath = path
+
+    override fun transfer(ticket: Ticket): Ticket {
+        var newTicket = ticket
         if (!isLogin) {
-            newPath = "/b"
-            Logger.d("未登录 中转到登录站=${newPath}")
+            newTicket = Ticket("/b")
+            Logger.d("未登录 中转到登录站=${newTicket.path}")
         }
-        return newPath
+        return newTicket
     }
+
 }
