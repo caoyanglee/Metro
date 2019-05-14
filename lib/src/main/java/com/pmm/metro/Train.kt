@@ -9,9 +9,9 @@ import com.pmm.metro.Ticket
  * Date:2019-05-13 22:32
  * Description:
  */
-class Train(val target: Any) {
+class Train(private val driver: Any) {
 
-    fun path(path: String): Schedule = Schedule(Ticket(path), this)
+    fun path(path: String): Schedule = Schedule(Ticket(path), driver)
 
 }
 

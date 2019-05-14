@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
+import android.view.View
 import java.io.Serializable
 
 /**
@@ -13,7 +14,7 @@ import java.io.Serializable
  * Date:2019-05-14 21:20
  * Description:
  */
-class Schedule(private var ticket: Ticket, private val train: Train) {
+class Schedule(private var ticket: Ticket, private val driver: Any) {
 
     fun attribute(name: String, value: Int) = this.apply {
         ticket.attribute(name, value)
@@ -161,30 +162,32 @@ class Schedule(private var ticket: Ticket, private val train: Train) {
         val enterAnim = ticket.enterAnim
         val exitAnim = ticket.exitAnim
 
-        when (train.target) {
+        when (driver) {
             is FragmentActivity -> {
-                val activity = train.target
                 if (requestCode != -1) {
-                    activity.startActivityForResult(intent.setClass(activity, station.destination), requestCode)
+                    driver.startActivityForResult(intent.setClass(driver, station.destination), requestCode)
                 } else {
-                    activity.startActivity(intent.setClass(activity, station.destination))
+                    driver.startActivity(intent.setClass(driver, station.destination))
                 }
                 if (enterAnim != 0 || exitAnim != 0)
-                    activity.overridePendingTransition(enterAnim, exitAnim)
+                    driver.overridePendingTransition(enterAnim, exitAnim)
             }
             is Fragment -> {
-                val fragment = train.target
                 if (requestCode != -1) {
-                    fragment.startActivityForResult(
-                        intent.setClass(fragment.requireContext(), station.destination),
+                    driver.startActivityForResult(
+                        intent.setClass(driver.requireContext(), station.destination),
                         requestCode
                     )
                 } else {
-                    fragment.startActivity(intent.setClass(fragment.requireContext(), station.destination))
+                    driver.startActivity(intent.setClass(driver.requireContext(), station.destination))
                 }
             }
             is Context -> {
-                val context = train.target
+                //context启动的Intent 不能带requestCode
+                driver.startActivity(intent.setClass(driver, station.destination))
+            }
+            is View -> {
+                val context = driver.context
                 //context启动的Intent 不能带requestCode
                 context.startActivity(intent.setClass(context, station.destination))
             }
