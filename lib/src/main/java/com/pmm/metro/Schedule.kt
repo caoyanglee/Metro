@@ -7,6 +7,7 @@ import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.view.View
+import com.weimu.universalview.ktx.toast
 import java.io.Serializable
 
 /**
@@ -158,6 +159,11 @@ class Schedule(private var ticket: Ticket, private val driver: Any) {
         }
 
         val station = MetroMap.findStation(ticket.path)//查询车站
+        if (station == null) {
+            toast("路径 = ${ticket.path} 无匹配结果！")
+            return
+        }
+
         val intent = ticket.intent
         val enterAnim = ticket.enterAnim
         val exitAnim = ticket.exitAnim

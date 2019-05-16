@@ -33,7 +33,9 @@ object Metro {
 //        })
     }
 
-
+    /**
+     * 扫描所有代理有@Staion的类，并返回Map集合
+     */
     private fun scan(context: Context): Map<String, Class<*>> {
         val map = HashMap<String, Class<*>>()
 

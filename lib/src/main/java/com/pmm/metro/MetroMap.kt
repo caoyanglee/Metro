@@ -1,7 +1,5 @@
 package com.pmm.metro
 
-import java.lang.IllegalArgumentException
-
 /**
  * Author:你需要一台永动机
  * Date:2019-05-13 22:35
@@ -9,12 +7,13 @@ import java.lang.IllegalArgumentException
  */
 object MetroMap {
 
-    private val stations = HashMap<String, StationMeta>()//车站
+    private val stations = HashMap<String, StationEntity>()//车站
     private val transferStations = arrayListOf<TransferStation>()//中转站集合
 
     //查询车站
-    fun findStation(path: String): StationMeta {
-        return stations[path] ?: throw IllegalArgumentException("the path $path not be founded!")
+    fun findStation(path: String): StationEntity? {
+        //return stations[path] ?: throw IllegalArgumentException("the path $path not be founded!")
+        return stations[path]
     }
 
     //增加车站
@@ -32,7 +31,7 @@ object MetroMap {
         destination: Class<*>,
         type: StationType = StationType.ACTIVITY
     ) {
-        val station = StationMeta(path, destination, type)
+        val station = StationEntity(path, destination, type)
         stations[path] = station
     }
 

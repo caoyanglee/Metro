@@ -5,14 +5,8 @@ package com.pmm.metro
  * Date:2019-05-13 23:04
  * Description:
  */
-class StationMeta(
+class StationEntity(
     var path: String,
     var destination: Class<*>,
     var type: StationType = StationType.ACTIVITY
 )
-
-enum class StationType(var code: Int, var className: String) {
-    ACTIVITY(0, "activity"),
-    SERVICE(1, "service")
-
-}

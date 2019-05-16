@@ -9,7 +9,7 @@ import com.pmm.metro.TransferStation
  * Date:2019-05-14 16:51
  * Description:
  */
-class LoginTransferStation : TransferStation {
+class UserCheckTransferStation : TransferStation {
     private val isLogin = false
 
 

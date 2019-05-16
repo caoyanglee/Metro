@@ -145,10 +145,4 @@ class Ticket(var path: String) {
         this.enterAnim = enterAnim
         this.exitAnim = exitAnim
     }
-
-    //是否无效
-    fun isValid(): Boolean {
-        if (path.isBlank()) return false
-        return true
-    }
 }

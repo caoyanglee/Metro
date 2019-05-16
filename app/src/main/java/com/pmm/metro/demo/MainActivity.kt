@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             Metro.with(this)
                 .path("/a")
                 .attribute("name", "你需要一台永动机")
-                .addTransferStation(LoginTransferStation())
+                .addTransferStation(UserCheckTransferStation())
                 .go()
         }
     }
