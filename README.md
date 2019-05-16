@@ -7,14 +7,15 @@
 
 ## 用法
 **添加站点**
-注解方式
+
+1. 注解方式
 ```kotlin
 //在对应的类上增加注解
 @Station("/main")
 class MainActivity{}
 ```
 
-代码方式
+2. 代码方式
 ```kotin
 MetroMap.addStation("/main", MainActivity::class.java)
 ```
