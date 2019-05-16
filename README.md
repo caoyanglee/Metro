@@ -6,11 +6,25 @@
 🚇地铁 一款简单的路由库
 
 ## 用法
+**添加站点**
+注解方式
+```kotlin
+//在对应的类上增加注解
+@Station("/main")
+class MainActivity{}
+```
+
+代码方式
+```kotin
+MetroMap.addStation("/main", MainActivity::class.java)
+```
+
+
 **跳转**
 ```kotlin
 Metro.with(this)
-    .path("/login")
-    .attribute("name", "你需要一台永动机")
+    .path("/main")
+    .attribute("currIndex", 1)
     .go()
 ```
 
@@ -19,18 +33,15 @@ Metro.with(this)
 //在Application中
 Metro.init(this)
 ```
-**配置**
+**拦截器**
 ```kotlin
 //增加中转站（类似拦截器）
 MetroMap.addTransferStation(object : TransferStation {
     override fun transfer(ticket: Ticket): Ticket {
-        Logger.d("目的站 = ${ticket.path}")
+        Logger.d("目的路径 = ${ticket.path}")
         return ticket
     }
 })
-
-//代码方式 增加站点
-MetroMap.addStation("/index", MainActivity::class.java)
 ```
 
 ## 获取依赖
