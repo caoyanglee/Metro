@@ -14,7 +14,7 @@ Metro.with(this)
     .go()
 ```
 
-**初始化 **
+**初始化**
 ```kotlin  
 //在Application中
 Metro.init(this)
