@@ -14,9 +14,9 @@ Metro.with(this)
     .go()
 ```
 
-**在Application初始化**
+**初始化 **
 ```kotlin  
-//全局初始化
+//在Application中
 Metro.init(this)
 ```
 **配置**
@@ -24,7 +24,7 @@ Metro.init(this)
 //增加中转站（类似拦截器）
 MetroMap.addTransferStation(object : TransferStation {
     override fun transfer(ticket: Ticket): Ticket {
-        Logger.d("目的站=${ticket.path}")
+        Logger.d("目的站 = ${ticket.path}")
         return ticket
     }
 })
