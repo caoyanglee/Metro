@@ -5,6 +5,34 @@
 <br>
 🚇地铁 一款简单的路由库
 
+## 用法
+**跳转**
+```kotlin
+Metro.with(this)
+    .path("/login")
+    .attribute("name", "你需要一台永动机")
+    .go()
+```
+
+**在Application初始化**
+```kotlin  
+//全局初始化
+Metro.init(this)
+```
+**配置**
+```kotlin
+//增加中转站（类似拦截器）
+MetroMap.addTransferStation(object : TransferStation {
+    override fun transfer(ticket: Ticket): Ticket {
+        Logger.d("目的站=${ticket.path}")
+        return ticket
+    }
+})
+
+//代码方式 增加站点
+MetroMap.addStation("/index", MainActivity::class.java)
+```
+
 ## 获取依赖
 
 **project的build.gradle**
@@ -24,17 +52,4 @@ allprojects {
 
 implementation 'com.github.caoyanglee:Metro:{latestVersion}'
 
-```
-
-## 用法
-**在Application初始化**
-```kotlin  
-Metro.init(this)
-```
-**在Application初始化**
-```kotlin
-Metro.with(this)
-    .path("/login")
-    .attribute("name", "你需要一台永动机")
-    .go()
 ```
