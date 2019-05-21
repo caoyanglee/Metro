@@ -1,11 +1,8 @@
 package com.pmm.metro
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v4.app.Fragment
 import java.io.Serializable
 
 /**
@@ -13,13 +10,30 @@ import java.io.Serializable
  * Date:2019-05-14 15:04
  * Description:
  */
-class Ticket(var path: String) {
+class Ticket(path: String) {
 
     val intent: Intent by lazy { Intent() }
     var enterAnim = 0//进入动画
     var exitAnim = 0//退出动画
     val transferStations = arrayListOf<TransferStation>()//中转站集合
 
+    val path: String
+
+    init {
+        if (path.indexOf("?") == -1) {
+            this.path = path
+        } else {
+            //将url的参数映射到intent当中
+            val index = path.indexOf("?")
+            this.path = path.substring(0, index)
+            val params = path.substring(index + 1)
+            val parasList = params.split("&")
+            for (item in parasList) {
+                val keyValue = item.split("=")
+                attribute(keyValue[0], keyValue[1])
+            }
+        }
+    }
 
     fun attribute(name: String, value: Int) = this.apply {
         intent.putExtra(name, value)

@@ -17,7 +17,11 @@ class AActivity : AppCompatActivity() {
         setContentView(R.layout.activity_a)
 
         val name = intent.getStringExtra("name")
-        toast("收到字段=$name")
+        val age = intent.getStringExtra("age")
+        toast("""
+            name = $name
+            age = $age
+        """.trimIndent())
 
         mTvJump.setOnClickListenerPro {
             Metro.with(this).path("/b").go()
