@@ -3,6 +3,7 @@ package com.pmm.metro
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import android.support.v4.app.Fragment
 import com.weimu.universalview.ktx.toast
 import java.io.Serializable
 
@@ -176,5 +177,8 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
 
     //转换Service
     fun direct2Service() = ServiceLauncher(this)
+
+    //转换Fragment
+    fun direct2Fragment() = FragmentLauncher(this)
 
 }

@@ -67,6 +67,7 @@ object Metro {
                         val type = when {
                             Activity::class.java.isAssignableFrom(entryClass) -> StationType.ACTIVITY
                             Service::class.java.isAssignableFrom(entryClass) -> StationType.SERVICE
+                            Fragment::class.java.isAssignableFrom(entryClass) -> StationType.FRAGMENT
                             else -> StationType.ACTIVITY
                         }
                         stationsList.add(

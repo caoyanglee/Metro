@@ -36,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         mBtnGetName.setOnClickListenerPro {
             toast("${testService?.getName()}")
         }
+
+        mBtnFragment.setOnClickListenerPro {
+            Metro.with(this).path("/fragment/test")
+                .direct2Fragment()
+                .go()
+        }
     }
 
     private fun startServices() {
@@ -53,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         Metro.with(this)
             .path("/service/test")
             .direct2Service()
-            .bind(conn)
+            .go()
 //        startService(Intent(this, TestService::class.java))
 //        bindService(Intent(this, TestService::class.java), conn, Context.BIND_AUTO_CREATE)
     }

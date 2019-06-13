@@ -32,4 +32,12 @@
             android:textSize="18sp"
     />
 
+    <Button
+            android:id="@+id/mBtnFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打开Fragment"
+            android:textSize="18sp"
+    />
+
 </android.support.v7.widget.LinearLayoutCompat>
