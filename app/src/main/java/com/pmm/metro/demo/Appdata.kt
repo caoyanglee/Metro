@@ -22,7 +22,7 @@ class Appdata : OriginAppData() {
         Metro.init(this)
 
         //中转站
-        MetroMap.addTransferStation(object : Transfer {
+        MetroMap.addTransfer(object : Transfer {
             override fun transfer(ticket: Ticket): Ticket {
                 Logger.d("目的站=${ticket.path}")
                 return ticket

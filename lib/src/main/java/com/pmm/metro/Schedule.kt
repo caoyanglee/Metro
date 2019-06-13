@@ -133,12 +133,12 @@ class Schedule(private var ticket: Ticket, private val driver: Any) {
         ticket.attribute(intent)
     }
 
-    fun addTransferStation(list: List<Transfer>) = this.apply {
+    fun addTransfer(list: List<Transfer>) = this.apply {
         ticket.addTransferStation(list)
     }
 
-    fun addTransferStation(transferStation: Transfer) = this.apply {
-        ticket.addTransferStation(arrayListOf(transferStation))
+    fun addTransfer(transfer: Transfer) = this.apply {
+        ticket.addTransferStation(arrayListOf(transfer))
     }
 
     fun overridePendingTransition(enterAnim: Int, exitAnim: Int) = this.apply {
@@ -150,7 +150,7 @@ class Schedule(private var ticket: Ticket, private val driver: Any) {
     //执行
     fun go(requestCode: Int = -1) {
         //全局 中转站
-        for (item in MetroMap.getTransferStation()) {
+        for (item in MetroMap.getTransfer()) {
             ticket = item.transfer(ticket)
         }
 
