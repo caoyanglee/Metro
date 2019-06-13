@@ -1,12 +1,8 @@
 package com.pmm.metro
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v4.app.Fragment
-import android.view.View
 import com.weimu.universalview.ktx.toast
 import java.io.Serializable
 
@@ -15,7 +11,7 @@ import java.io.Serializable
  * Date:2019-05-14 21:20
  * Description:
  */
-class Schedule(private var ticket: Ticket, private val driver: Any) {
+class Dispatcher(private var ticket: Ticket, private val driver: Any) {
 
     fun attribute(name: String, value: Int) = this.apply {
         ticket.attribute(name, value)
@@ -147,8 +143,8 @@ class Schedule(private var ticket: Ticket, private val driver: Any) {
     }
 
 
-    //执行
-    fun go(requestCode: Int = -1) {
+    //获取站点
+    fun getStation(): StationMeta? {
         //全局 中转站
         for (item in MetroMap.getTransfer()) {
             ticket = item.transfer(ticket)
@@ -161,42 +157,24 @@ class Schedule(private var ticket: Ticket, private val driver: Any) {
         val station = MetroMap.findStation(ticket.path)//查询车站
         if (station == null) {
             toast("路径 = ${ticket.path} 无匹配结果！")
-            return
+            return null
         }
-
-        val intent = ticket.intent
-        val enterAnim = ticket.enterAnim
-        val exitAnim = ticket.exitAnim
-
-        when (driver) {
-            is Activity -> {
-                if (requestCode != -1) {
-                    driver.startActivityForResult(intent.setClass(driver, station.destination), requestCode)
-                } else {
-                    driver.startActivity(intent.setClass(driver, station.destination))
-                }
-                if (enterAnim != 0 || exitAnim != 0)
-                    driver.overridePendingTransition(enterAnim, exitAnim)
-            }
-            is Fragment -> {
-                if (requestCode != -1) {
-                    driver.startActivityForResult(
-                        intent.setClass(driver.requireContext(), station.destination),
-                        requestCode
-                    )
-                } else {
-                    driver.startActivity(intent.setClass(driver.requireContext(), station.destination))
-                }
-            }
-            is Context -> {
-                //context启动的Intent 不能带requestCode
-                driver.startActivity(intent.setClass(driver, station.destination))
-            }
-            is View -> {
-                val context = driver.context
-                //context启动的Intent 不能带requestCode
-                context.startActivity(intent.setClass(context, station.destination))
-            }
-        }
+        return station
     }
+
+    //获取票
+    fun getTicket() = ticket
+
+    //获取驱动着
+    fun getDriver() = driver
+
+    //开启Activity
+    fun go(requestCode: Int = -1) = direct2Activity().go(requestCode)
+
+    //转换Activity
+    fun direct2Activity() = ActivityLauncher(this)
+
+    //转换Service
+    fun direct2Service() = ServiceLauncher(this)
+
 }

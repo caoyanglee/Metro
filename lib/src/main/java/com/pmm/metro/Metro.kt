@@ -2,13 +2,14 @@ package com.pmm.metro
 
 import android.app.Activity
 import android.app.Application
+import android.app.Service
 import android.content.Context
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.View
 import dalvik.system.DexFile
 import dalvik.system.PathClassLoader
 import java.io.IOException
-import java.util.*
 
 
 /**
@@ -17,6 +18,10 @@ import java.util.*
  * Description:
  */
 object Metro {
+
+    fun Any.logd(message: String) {
+        Log.d("metro", message)
+    }
 
     fun with(target: Any): Train {
         if (target !is Activity && (target !is Fragment) && (target !is Context) && (target !is View))
@@ -28,7 +33,7 @@ object Metro {
         //扫描所有带Station的类
         val map = scan(context)
         for (item in map) {
-            MetroMap.addStation(item.key, item.value)
+            MetroMap.addStation(item)
         }
 
         //增加全局 中转站
@@ -43,9 +48,8 @@ object Metro {
     /**
      * 扫描所有代理有@Staion的类，并返回Map集合
      */
-    private fun scan(context: Context): Map<String, Class<*>> {
-        val map = HashMap<String, Class<*>>()
-
+    private fun scan(context: Context): List<StationMeta> {
+        val stationsList = arrayListOf<StationMeta>()
         try {
             val classLoader = Thread.currentThread().contextClassLoader as PathClassLoader
 
@@ -56,20 +60,32 @@ object Metro {
                 //扫所有的类
                 val entryClass = df.loadClass(element, classLoader)
                 if (entryClass != null) {
-
                     val annotation = entryClass.getAnnotation<Station>(Station::class.java)
                     if (annotation != null) {
                         val station = annotation as Station
-                        //Logger.e("path=" + annotation.path());
-                        map[station.path] = entryClass
+
+                        val type = when {
+                            Activity::class.java.isAssignableFrom(entryClass) -> StationType.ACTIVITY
+                            Service::class.java.isAssignableFrom(entryClass) -> StationType.SERVICE
+                            else -> StationType.ACTIVITY
+                        }
+                        stationsList.add(
+                            StationMeta(
+                                path = station.path,
+                                destination = entryClass,
+                                type = type
+                            )
+                        )
+//                        logd("$entryClass")
+//                        logd("${station.path}")
+//                        logd("--------------------")
                     }
                 }
             }
         } catch (e1: IOException) {
             e1.printStackTrace()
         }
-
-        return map
+        return stationsList
     }
 
 

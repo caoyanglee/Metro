@@ -7,11 +7,11 @@ package com.pmm.metro
  */
 object MetroMap {
 
-    private val stations = HashMap<String, StationEntity>()//车站
+    private val stations = HashMap<String, StationMeta>()//车站
     private val transfers = arrayListOf<Transfer>()//中转站集合
 
     //查询车站
-    fun findStation(path: String): StationEntity? {
+    fun findStation(path: String): StationMeta? {
         //return stations[path] ?: throw IllegalArgumentException("the path $path not be founded!")
         return stations[path]
     }
@@ -25,14 +25,24 @@ object MetroMap {
         modifyStation(path, destination, type)
     }
 
+    //增加车站
+    fun addStation(station: StationMeta) {
+        modifyStation(station)
+    }
+
     //修改车站
     fun modifyStation(
         path: String,
         destination: Class<*>,
         type: StationType = StationType.ACTIVITY
     ) {
-        val station = StationEntity(path, destination, type)
+        val station = StationMeta(path, destination, type)
         stations[path] = station
+    }
+
+    //修改车站
+    fun modifyStation(station: StationMeta) {
+        stations[station.path] = station
     }
 
     //删除车站

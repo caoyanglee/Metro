@@ -5,7 +5,7 @@ package com.pmm.metro
  * Date:2019-05-13 23:04
  * Description:
  */
-class StationEntity(
+class StationMeta(
     var path: String,
     var destination: Class<*>,
     var type: StationType = StationType.ACTIVITY
