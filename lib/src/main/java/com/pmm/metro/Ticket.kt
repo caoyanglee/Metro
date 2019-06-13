@@ -15,7 +15,7 @@ class Ticket(path: String) {
     val intent: Intent by lazy { Intent() }
     var enterAnim = 0//进入动画
     var exitAnim = 0//退出动画
-    val transferStations = arrayListOf<TransferStation>()//中转站集合
+    val transferStations = arrayListOf<Transfer>()//中转站集合
 
     val path: String
 
@@ -151,7 +151,7 @@ class Ticket(path: String) {
         this.intent.putExtras(intent)
     }
 
-    fun addTransferStation(list: List<TransferStation>) {
+    fun addTransferStation(list: List<Transfer>) {
         transferStations.addAll(list)
     }
 

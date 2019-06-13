@@ -8,7 +8,7 @@ package com.pmm.metro
 object MetroMap {
 
     private val stations = HashMap<String, StationEntity>()//车站
-    private val transferStations = arrayListOf<TransferStation>()//中转站集合
+    private val transfers = arrayListOf<Transfer>()//中转站集合
 
     //查询车站
     fun findStation(path: String): StationEntity? {
@@ -42,13 +42,13 @@ object MetroMap {
 
 
     //增加中转站
-    fun addTransferStation(transferStation: TransferStation) {
-        transferStations.add(transferStation)
+    fun addTransfer(transfer: Transfer) {
+        transfers.add(transfer)
     }
 
     //获取中转站
-    fun getTransferStation(): List<TransferStation> {
-        return transferStations
+    fun getTransfer(): List<Transfer> {
+        return transfers
     }
 
 }

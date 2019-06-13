@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.view.View
 import com.weimu.universalview.ktx.toast
 import java.io.Serializable
@@ -134,11 +133,11 @@ class Schedule(private var ticket: Ticket, private val driver: Any) {
         ticket.attribute(intent)
     }
 
-    fun addTransferStation(list: List<TransferStation>) = this.apply {
+    fun addTransferStation(list: List<Transfer>) = this.apply {
         ticket.addTransferStation(list)
     }
 
-    fun addTransferStation(transferStation: TransferStation) = this.apply {
+    fun addTransferStation(transferStation: Transfer) = this.apply {
         ticket.addTransferStation(arrayListOf(transferStation))
     }
 

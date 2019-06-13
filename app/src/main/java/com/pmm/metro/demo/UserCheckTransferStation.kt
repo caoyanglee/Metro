@@ -2,14 +2,14 @@ package com.pmm.metro.demo
 
 import com.orhanobut.logger.Logger
 import com.pmm.metro.Ticket
-import com.pmm.metro.TransferStation
+import com.pmm.metro.Transfer
 
 /**
  * Author:你需要一台永动机
  * Date:2019-05-14 16:51
  * Description:
  */
-class UserCheckTransferStation : TransferStation {
+class UserCheckTransferStation : Transfer {
     private val isLogin = false
 
 

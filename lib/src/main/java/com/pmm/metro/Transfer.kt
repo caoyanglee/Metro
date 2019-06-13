@@ -5,7 +5,7 @@ package com.pmm.metro
  * Date:2019-05-14 16:37
  * Description:
  */
-interface TransferStation {
+interface Transfer {
 
     fun transfer(ticket: Ticket): Ticket
 }
