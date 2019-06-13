@@ -1,7 +1,10 @@
 package com.pmm.metro
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.support.v4.app.Fragment
+import android.view.View
 import dalvik.system.DexFile
 import dalvik.system.PathClassLoader
 import java.io.IOException
@@ -15,7 +18,11 @@ import java.util.*
  */
 object Metro {
 
-    fun with(target: Any): Train = Train(target)
+    fun with(target: Any): Train {
+        if (target !is Activity && (target !is Fragment) && (target !is Context) && (target !is View))
+            throw IllegalAccessException("target must be Activity,Fragment,Context or View")
+        return Train(target)
+    }
 
     fun init(context: Application) {
         //扫描所有带Station的类

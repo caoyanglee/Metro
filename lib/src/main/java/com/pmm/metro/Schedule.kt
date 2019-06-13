@@ -1,5 +1,6 @@
 package com.pmm.metro
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -169,7 +170,7 @@ class Schedule(private var ticket: Ticket, private val driver: Any) {
         val exitAnim = ticket.exitAnim
 
         when (driver) {
-            is FragmentActivity -> {
+            is Activity -> {
                 if (requestCode != -1) {
                     driver.startActivityForResult(intent.setClass(driver, station.destination), requestCode)
                 } else {
