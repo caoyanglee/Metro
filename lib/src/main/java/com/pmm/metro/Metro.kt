@@ -19,10 +19,6 @@ import java.io.IOException
  */
 object Metro {
 
-    fun Any.logd(message: String) {
-        Log.d("metro", message)
-    }
-
     fun with(target: Any): Train {
         if (target !is Activity && (target !is Fragment) && (target !is Context) && (target !is View))
             throw IllegalAccessException("target must be Activity,Fragment,Context or View")
@@ -77,9 +73,6 @@ object Metro {
                                 type = type
                             )
                         )
-//                        logd("$entryClass")
-//                        logd("${station.path}")
-//                        logd("--------------------")
                     }
                 }
             }
