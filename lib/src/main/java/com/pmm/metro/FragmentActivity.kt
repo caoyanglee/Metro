@@ -1,27 +1,24 @@
 package com.pmm.metro
 
-/**
- * Author:你需要一台永动机
- * Date:2019-06-13 18:17
- * Description:
- */
-
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutCompat
 import android.util.AttributeSet
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.weimu.universalview.core.activity.BaseActivity
 
 /**
- * 专门显示fragment的activity的基类
+ * Author:你需要一台永动机
+ * Date:2019-06-15 15:20
+ * Description:专门显示fragment的activity的基类
  */
-internal class SingleFragmentActivity : BaseActivity() {
-    protected var fragmentManager = supportFragmentManager
+internal class FragmentActivity : BaseActivity() {
 
     companion object {
         var fragment: Fragment? = null
@@ -32,8 +29,11 @@ internal class SingleFragmentActivity : BaseActivity() {
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (fragment == null) return
-        fragmentManager.beginTransaction().add(R.id.single_fragment_container, fragment!!).commitAllowingStateLoss()
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.single_fragment_container, fragment!!)
+                .commitAllowingStateLoss()
+        }
     }
 
     override fun onDestroy() {
@@ -42,29 +42,22 @@ internal class SingleFragmentActivity : BaseActivity() {
     }
 }
 
-
 class BaseFragmentUI : LinearLayoutCompat {
-
     constructor(context: Context) : this(context, null)
-
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
 
     init {
-        orientation = LinearLayout.VERTICAL
-
-        val frameLayout = FrameLayout(context)
-        frameLayout.id = R.id.single_fragment_container
-
-        addView(frameLayout)
-
-        val targetLayoutParams = (frameLayout.layoutParams as LinearLayoutCompat.LayoutParams).apply {
-            width = LinearLayoutCompat.LayoutParams.MATCH_PARENT
-            height = LinearLayoutCompat.LayoutParams.WRAP_CONTENT
+        this.apply {
+            this.orientation = VERTICAL
         }
-        frameLayout.layoutParams = targetLayoutParams
+
+        FrameLayout(context).apply {
+            this.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+            this.id = R.id.single_fragment_container
+            this@BaseFragmentUI.addView(this)
+        }
+
+
     }
-
-
 }

@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity() {
 
         mBtnFragment.setOnClickListenerPro {
             Metro.with(this).path("/fragment/test")
+                .attribute("id", 3)
+                .attribute("name", "你需要一台永动机")
                 .direct2Fragment()
                 .go()
         }

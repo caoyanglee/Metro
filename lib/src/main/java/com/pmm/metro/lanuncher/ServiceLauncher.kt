@@ -1,10 +1,12 @@
-package com.pmm.metro
+package com.pmm.metro.lanuncher
 
 import android.app.Activity
 import android.content.Context
 import android.content.ServiceConnection
 import android.support.v4.app.Fragment
 import android.view.View
+import com.pmm.metro.Dispatcher
+import com.pmm.metro.StationType
 
 /**
  * Author:你需要一台永动机
@@ -15,7 +17,7 @@ class ServiceLauncher(private val dispatcher: Dispatcher) {
 
     //开启Service
     fun go() {
-        val station = dispatcher.getStation() ?: return
+        val station = dispatcher.getStation(StationType.SERVICE) ?: return
         val intent = dispatcher.getTicket().intent
         when (val driver = dispatcher.getDriver()) {
             is Activity -> {
@@ -40,7 +42,7 @@ class ServiceLauncher(private val dispatcher: Dispatcher) {
         conn: ServiceConnection,
         flags: Int = Context.BIND_AUTO_CREATE
     ) {
-        val station = dispatcher.getStation() ?: return
+        val station = dispatcher.getStation(StationType.SERVICE) ?: return
         val intent = dispatcher.getTicket().intent
         when (val driver = dispatcher.getDriver()) {
             is Activity -> {

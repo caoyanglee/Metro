@@ -3,7 +3,9 @@ package com.pmm.metro
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v4.app.Fragment
+import com.pmm.metro.lanuncher.ActivityLauncher
+import com.pmm.metro.lanuncher.FragmentLauncher
+import com.pmm.metro.lanuncher.ServiceLauncher
 import com.weimu.universalview.ktx.toast
 import java.io.Serializable
 
@@ -145,7 +147,7 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
 
 
     //获取站点
-    fun getStation(): StationMeta? {
+    fun getStation(type: StationType): StationMeta? {
         //全局 中转站
         for (item in MetroMap.getTransfer()) {
             ticket = item.transfer(ticket)
@@ -158,6 +160,10 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
         val station = MetroMap.findStation(ticket.path)//查询车站
         if (station == null) {
             toast("路径 = ${ticket.path} 无匹配结果！")
+            return null
+        }
+        if (station.type != type) {
+            toast("路径 = ${ticket.path} 不是${type}类型")
             return null
         }
         return station

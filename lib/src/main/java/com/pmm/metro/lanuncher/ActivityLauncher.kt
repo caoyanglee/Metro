@@ -1,10 +1,12 @@
-package com.pmm.metro
+package com.pmm.metro.lanuncher
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.support.v4.app.Fragment
 import android.view.View
+import com.pmm.metro.Dispatcher
+import com.pmm.metro.StationType
 
 /**
  * Author:你需要一台永动机
@@ -14,7 +16,7 @@ import android.view.View
 class ActivityLauncher(private val dispatcher: Dispatcher) {
 
     fun go(requestCode: Int = -1) {
-        val station = dispatcher.getStation() ?: return
+        val station = dispatcher.getStation(StationType.ACTIVITY) ?: return
 
         val ticket = dispatcher.getTicket()
         val intent = ticket.intent
