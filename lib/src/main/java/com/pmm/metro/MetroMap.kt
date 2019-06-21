@@ -25,9 +25,12 @@ object MetroMap {
         modifyStation(path, destination, type)
     }
 
+
     //增加车站
-    fun addStation(station: StationMeta) {
-        modifyStation(station)
+    fun addStation(vararg stations: StationMeta) {
+        for (item in stations) {
+            modifyStation(item)
+        }
     }
 
     //修改车站

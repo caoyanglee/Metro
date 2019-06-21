@@ -2,10 +2,7 @@ package com.pmm.metro.demo
 
 import android.util.Log
 import com.orhanobut.logger.Logger
-import com.pmm.metro.Metro
-import com.pmm.metro.MetroMap
-import com.pmm.metro.Ticket
-import com.pmm.metro.Transfer
+import com.pmm.metro.*
 import com.weimu.universalview.OriginAppData
 
 /**

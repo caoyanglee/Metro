@@ -28,9 +28,7 @@ object Metro {
     fun init(context: Application) {
         //扫描所有带Station的类
         val map = scan(context)
-        for (item in map) {
-            MetroMap.addStation(item)
-        }
+        MetroMap.addStation(*map.toTypedArray())
 
         //增加全局 中转站
 //        MetroMap.addTransfer(object : TransferStation {
