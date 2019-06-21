@@ -15,7 +15,6 @@ class Ticket(path: String) {
     val intent: Intent by lazy { Intent() }
     var enterAnim = 0//进入动画
     var exitAnim = 0//退出动画
-    private val transfers = arrayListOf<Transfer>()//中转站集合
 
     var path: String = ""
         set(value) {
@@ -159,18 +158,6 @@ class Ticket(path: String) {
         this.intent.extras?.clear()
     }
 
-    fun getTransfers() = transfers
-
-    fun addTransfer(transfer: Transfer) = this.apply {
-        transfers.add(transfer)
-    }
-
-    fun addTransfer(list: List<Transfer>) = this.apply {
-        transfers.addAll(list)
-    }
-
-    fun clearTransfer() = this.apply { transfers.clear() }
-
     fun overridePendingTransition(enterAnim: Int, exitAnim: Int) = this.apply {
         this.enterAnim = enterAnim
         this.exitAnim = exitAnim
@@ -179,5 +166,11 @@ class Ticket(path: String) {
     fun clearOverridePendingTransition() = this.apply {
         this.enterAnim = 0
         this.exitAnim = 0
+    }
+
+    fun clear() {
+        this.path = ""
+        clearAttributes()
+        clearOverridePendingTransition()
     }
 }
