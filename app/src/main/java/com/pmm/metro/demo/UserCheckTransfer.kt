@@ -14,12 +14,11 @@ class UserCheckTransfer : Transfer {
 
 
     override fun transfer(ticket: Ticket): Ticket {
-        var newTicket = ticket
         if (!isLogin) {
-            newTicket = Ticket("/b")
-            Logger.d("未登录 中转到登录站=${newTicket.path}")
+            ticket.path = "/b"
+            Logger.d("未登录 中转到登录站=${ticket.path}")
         }
-        return newTicket
+        return ticket
     }
 
 }

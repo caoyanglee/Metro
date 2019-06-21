@@ -57,8 +57,6 @@ object MetroMap {
     }
 
     //获取中转站
-    fun getTransfer(): List<Transfer> {
-        return transfers
-    }
+    fun getTransfers(): List<Transfer> = transfers
 
 }

@@ -18,10 +18,14 @@ class AActivity : AppCompatActivity() {
 
         val name = intent.getStringExtra("name")
         val age = intent.getStringExtra("age")
-        toast("""
+        val url = intent.getStringExtra("url")
+        toast(
+            """
             name = $name
             age = $age
-        """.trimIndent())
+            url = $url
+        """.trimIndent()
+        )
 
         mTvJump.setOnClickListenerPro {
             Metro.with(this).path("/b").go()

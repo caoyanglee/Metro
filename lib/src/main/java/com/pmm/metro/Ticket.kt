@@ -15,24 +15,28 @@ class Ticket(path: String) {
     val intent: Intent by lazy { Intent() }
     var enterAnim = 0//进入动画
     var exitAnim = 0//退出动画
-    val transferStations = arrayListOf<Transfer>()//中转站集合
+    private val transfers = arrayListOf<Transfer>()//中转站集合
 
-    val path: String
+    var path: String = ""
+        set(value) {
+            if (value.indexOf("?") != -1) {
+                //将url的参数映射到intent当中
+                val index = value.indexOf("?")
+                field = value.substring(0, index)
 
-    init {
-        if (path.indexOf("?") == -1) {
-            this.path = path
-        } else {
-            //将url的参数映射到intent当中
-            val index = path.indexOf("?")
-            this.path = path.substring(0, index)
-            val params = path.substring(index + 1)
-            val parasList = params.split("&")
-            for (item in parasList) {
-                val keyValue = item.split("=")
-                attribute(keyValue[0], keyValue[1])
+                val params = value.substring(index + 1)
+                val parasList = params.split("&")
+                for (item in parasList) {
+                    val keyValue = item.split("=")
+                    attribute(keyValue[0], keyValue[1])
+                }
+            } else {
+                field = value
             }
         }
+
+    init {
+        this.path = path
     }
 
     fun attribute(name: String, value: Int) = this.apply {
@@ -151,12 +155,29 @@ class Ticket(path: String) {
         this.intent.putExtras(intent)
     }
 
-    fun addTransferStation(list: List<Transfer>) {
-        transferStations.addAll(list)
+    fun clearAttributes() = this.apply {
+        this.intent.extras?.clear()
     }
+
+    fun getTransfers() = transfers
+
+    fun addTransfer(transfer: Transfer) = this.apply {
+        transfers.add(transfer)
+    }
+
+    fun addTransfer(list: List<Transfer>) = this.apply {
+        transfers.addAll(list)
+    }
+
+    fun clearTransfer() = this.apply { transfers.clear() }
 
     fun overridePendingTransition(enterAnim: Int, exitAnim: Int) = this.apply {
         this.enterAnim = enterAnim
         this.exitAnim = exitAnim
+    }
+
+    fun clearOverridePendingTransition() = this.apply {
+        this.enterAnim = 0
+        this.exitAnim = 0
     }
 }

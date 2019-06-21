@@ -22,10 +22,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val url = "http://www.baidu.com"
+
         mTvJump.setOnClickListenerPro {
             Metro.with(this)
-                .path("/a?name=你需要一台永动机&age=27")
-                //.addTransferStation(UserCheckTransferStation())
+                .path("/a?name=你需要一台永动机&age=27&url=$url")
+                .addTransfer(UserCheckTransfer())
                 .go()
         }
 

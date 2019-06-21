@@ -1,16 +1,14 @@
-package com.pmm.metro
+package com.pmm.metro.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutCompat
 import android.util.AttributeSet
-import android.util.Log
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.LinearLayout
+import com.pmm.metro.R
 import com.weimu.universalview.core.activity.BaseActivity
 
 /**

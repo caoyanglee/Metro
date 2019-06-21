@@ -133,27 +133,26 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
     }
 
     fun addTransfer(list: List<Transfer>) = this.apply {
-        ticket.addTransferStation(list)
+        ticket.addTransfer(list)
     }
 
     fun addTransfer(transfer: Transfer) = this.apply {
-        ticket.addTransferStation(arrayListOf(transfer))
+        ticket.addTransfer(transfer)
     }
 
     fun overridePendingTransition(enterAnim: Int, exitAnim: Int) = this.apply {
-        ticket.enterAnim = enterAnim
-        ticket.exitAnim = exitAnim
+        ticket.overridePendingTransition(enterAnim, exitAnim)
     }
 
 
     //获取站点
     fun getStation(type: StationType): StationMeta? {
         //全局 中转站
-        for (item in MetroMap.getTransfer()) {
+        for (item in MetroMap.getTransfers()) {
             ticket = item.transfer(ticket)
         }
 
-        for (item in ticket.transferStations) {
+        for (item in ticket.getTransfers()) {
             ticket = item.transfer(ticket)
         }
 

@@ -16,7 +16,7 @@ class BActivity : AppCompatActivity() {
 
         mTvJump.setOnClickListenerPro {
             Metro.with(this)
-                .path("/a")
+                .path("/main")
                 .overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.noting)
                 .go()
         }
