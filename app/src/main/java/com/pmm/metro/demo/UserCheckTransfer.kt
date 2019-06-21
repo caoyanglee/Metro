@@ -1,5 +1,6 @@
 package com.pmm.metro.demo
 
+import android.util.Log
 import com.orhanobut.logger.Logger
 import com.pmm.metro.Ticket
 import com.pmm.metro.Transfer
@@ -16,7 +17,7 @@ class UserCheckTransfer : Transfer {
     override fun transfer(ticket: Ticket): Ticket {
         if (!isLogin) {
             ticket.path = "/b"
-            Logger.d("未登录 中转到登录站=${ticket.path}")
+            Log.d("metro","未登录 中转到登录站=${ticket.path}")
         }
         return ticket
     }

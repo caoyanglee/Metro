@@ -1,5 +1,6 @@
 package com.pmm.metro.demo
 
+import android.util.Log
 import com.orhanobut.logger.Logger
 import com.pmm.metro.Metro
 import com.pmm.metro.MetroMap
@@ -24,7 +25,7 @@ class Appdata : OriginAppData() {
         //中转站
         MetroMap.addTransfer(object : Transfer {
             override fun transfer(ticket: Ticket): Ticket {
-                Logger.d("目的站=${ticket.path}")
+                Log.d("metro","目的站=${ticket.path}")
                 return ticket
             }
         })

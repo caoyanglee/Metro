@@ -16,6 +16,8 @@ import java.io.Serializable
  */
 class Dispatcher(private var ticket: Ticket, private val driver: Any) {
 
+    private val transfers = arrayListOf<Transfer>()//中转站集合
+
     fun attribute(name: String, value: Int) = this.apply {
         ticket.attribute(name, value)
     }
@@ -133,11 +135,11 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
     }
 
     fun addTransfer(list: List<Transfer>) = this.apply {
-        ticket.addTransfer(list)
+        transfers.addAll(list)
     }
 
     fun addTransfer(transfer: Transfer) = this.apply {
-        ticket.addTransfer(transfer)
+        transfers.add(transfer)
     }
 
     fun overridePendingTransition(enterAnim: Int, exitAnim: Int) = this.apply {
@@ -151,11 +153,9 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
         for (item in MetroMap.getTransfers()) {
             ticket = item.transfer(ticket)
         }
-
-        for (item in ticket.getTransfers()) {
+        for (item in transfers) {
             ticket = item.transfer(ticket)
         }
-
         val station = MetroMap.findStation(ticket.path)//查询车站
         if (station == null) {
             toast("路径 = ${ticket.path} 无匹配结果！")
