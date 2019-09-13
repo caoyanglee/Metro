@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.IBinder
 import com.pmm.metro.Metro
 import com.pmm.metro.Station
+import com.pmm.metro.demo.transfer.UserCheckTransfer
 import com.weimu.universalview.ktx.setOnClickListenerPro
 import com.weimu.universalview.ktx.toast
 import kotlinx.android.synthetic.main.activity_main.*
