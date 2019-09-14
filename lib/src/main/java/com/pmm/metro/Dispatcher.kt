@@ -3,11 +3,12 @@ package com.pmm.metro
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import android.widget.Toast
 import com.pmm.metro.lanuncher.ActivityLauncher
 import com.pmm.metro.lanuncher.FragmentLauncher
 import com.pmm.metro.lanuncher.ServiceLauncher
-import com.weimu.universalview.ktx.toast
 import java.io.Serializable
+import java.lang.IllegalArgumentException
 
 /**
  * Author:你需要一台永动机
@@ -158,12 +159,10 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
         }
         val station = MetroMap.findStation(ticket.path)//查询车站
         if (station == null) {
-            toast("路径 = ${ticket.path} 无匹配结果！")
-            return null
+            throw IllegalArgumentException("路径 = ${ticket.path} 无匹配结果！")
         }
         if (station.type != type) {
-            toast("路径 = ${ticket.path} 不是${type}类型")
-            return null
+            throw IllegalArgumentException("路径 = ${ticket.path} 不是${type}类型")
         }
         return station
     }

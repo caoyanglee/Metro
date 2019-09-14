@@ -4,29 +4,28 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutCompat
 import android.util.AttributeSet
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.pmm.metro.R
-import com.weimu.universalview.core.activity.BaseActivity
 
 /**
  * Author:你需要一台永动机
  * Date:2019-06-15 15:20
  * Description:专门显示fragment的activity的基类
  */
-internal class FragmentActivity : BaseActivity() {
+internal class FragmentAy : AppCompatActivity() {
 
     companion object {
         var fragment: Fragment? = null
     }
 
-    override fun getLayoutUI(): ViewGroup? = BaseFragmentUI(this)
-
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(BaseFragmentUI(this))
+
         if (fragment != null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.single_fragment_container, fragment!!)

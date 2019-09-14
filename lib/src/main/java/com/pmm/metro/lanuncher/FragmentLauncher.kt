@@ -6,8 +6,8 @@ import android.content.Intent
 import android.support.v4.app.Fragment
 import android.view.View
 import com.pmm.metro.Dispatcher
-import com.pmm.metro.ui.FragmentActivity
 import com.pmm.metro.StationType
+import com.pmm.metro.ui.FragmentAy
 
 /**
  * Author:你需要一台永动机
@@ -26,7 +26,7 @@ class FragmentLauncher(private val dispatcher: Dispatcher) {
         val enterAnim = ticket.enterAnim
         val exitAnim = ticket.exitAnim
 
-        FragmentActivity.fragment = (station.destination.newInstance() as Fragment).apply {
+        FragmentAy.fragment = (station.destination.newInstance() as Fragment).apply {
             arguments = intent.extras
         }
 
@@ -34,11 +34,11 @@ class FragmentLauncher(private val dispatcher: Dispatcher) {
             is Activity -> {
                 if (requestCode != -1) {
                     driver.startActivityForResult(
-                        intent.setClass(driver, FragmentActivity::class.java),
+                        intent.setClass(driver, FragmentAy::class.java),
                         requestCode
                     )
                 } else {
-                    driver.startActivity(intent.setClass(driver, FragmentActivity::class.java))
+                    driver.startActivity(intent.setClass(driver, FragmentAy::class.java))
                 }
                 if (enterAnim != 0 || exitAnim != 0)
                     driver.overridePendingTransition(enterAnim, exitAnim)
@@ -46,23 +46,23 @@ class FragmentLauncher(private val dispatcher: Dispatcher) {
             is Fragment -> {
                 if (requestCode != -1) {
                     driver.startActivityForResult(
-                        intent.setClass(driver.requireContext(), FragmentActivity::class.java),
+                        intent.setClass(driver.requireContext(), FragmentAy::class.java),
                         requestCode
                     )
                 } else {
-                    driver.startActivity(intent.setClass(driver.requireContext(), FragmentActivity::class.java))
+                    driver.startActivity(intent.setClass(driver.requireContext(), FragmentAy::class.java))
                 }
             }
             is Context -> {
                 //context启动的Intent 不能带requestCode
-                driver.startActivity(intent.setClass(driver, FragmentActivity::class.java).apply {
+                driver.startActivity(intent.setClass(driver, FragmentAy::class.java).apply {
                     this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 })
             }
             is View -> {
                 val context = driver.context
                 //context启动的Intent 不能带requestCode
-                context.startActivity(intent.setClass(context, FragmentActivity::class.java).apply {
+                context.startActivity(intent.setClass(context, FragmentAy::class.java).apply {
                     this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 })
             }

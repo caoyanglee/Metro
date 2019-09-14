@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.pmm.metro">
     <application>
-        <activity android:name=".ui.FragmentActivity"/>
+        <activity android:name=".ui.FragmentAy"/>
     </application>
 </manifest>
