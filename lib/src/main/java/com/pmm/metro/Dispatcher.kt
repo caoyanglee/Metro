@@ -3,12 +3,11 @@ package com.pmm.metro
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.widget.Toast
 import com.pmm.metro.lanuncher.ActivityLauncher
 import com.pmm.metro.lanuncher.FragmentLauncher
 import com.pmm.metro.lanuncher.ServiceLauncher
 import java.io.Serializable
-import java.lang.IllegalArgumentException
+import java.lang.Exception
 
 /**
  * Author:你需要一台永动机
@@ -18,6 +17,8 @@ import java.lang.IllegalArgumentException
 class Dispatcher(private var ticket: Ticket, private val driver: Any) {
 
     private val transfers = arrayListOf<Transfer>()//中转站集合
+
+    private var exceptionCallback: ((e: Exception) -> Unit)? = null
 
     fun attribute(name: String, value: Int) = this.apply {
         ticket.attribute(name, value)
@@ -159,10 +160,12 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
         }
         val station = MetroMap.findStation(ticket.path)//查询车站
         if (station == null) {
-            throw IllegalArgumentException("路径 = ${ticket.path} 无匹配结果！")
+            exceptionCallback?.invoke(IllegalArgumentException("路径 = ${ticket.path} 无匹配结果！"))
+            return null
         }
         if (station.type != type) {
-            throw IllegalArgumentException("路径 = ${ticket.path} 不是${type}类型")
+            exceptionCallback?.invoke(IllegalArgumentException("路径 = ${ticket.path} 不是${type}类型"))
+            return null
         }
         return station
     }
@@ -185,4 +188,7 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
     //转换Fragment
     fun direct2Fragment() = FragmentLauncher(this)
 
+    fun fail(exceptionCallBack: ((e: Exception) -> Unit)) = this.apply {
+        this.exceptionCallback = exceptionCallBack
+    }
 }
