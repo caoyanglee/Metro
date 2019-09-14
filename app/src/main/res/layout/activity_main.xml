@@ -42,10 +42,10 @@
 
 
     <Button
-            android:id="@+id/mBtnUrl"
+            android:id="@+id/mBtnFail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="打开Fragment"
+            android:text="打开失败回调"
             android:textSize="18sp"
     />
 

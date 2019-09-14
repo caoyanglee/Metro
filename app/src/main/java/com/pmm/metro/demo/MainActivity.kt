@@ -47,6 +47,13 @@ class MainActivity : AppCompatActivity() {
                 .direct2Fragment()
                 .go()
         }
+
+        mBtnFail.setOnClickListenerPro {
+            Metro.with(this)
+                .path("/webview")
+                .fail { toast(it.message.toString()) }
+                .go()
+        }
     }
 
     private fun startServices() {
