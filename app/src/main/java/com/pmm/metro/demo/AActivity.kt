@@ -2,11 +2,11 @@ package com.pmm.metro.demo
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.pmm.metro.Metro
 import com.pmm.metro.Station
-import com.weimu.universalview.ktx.setOnClickListenerPro
-import com.weimu.universalview.ktx.toast
+import com.pmm.ui.ktx.setOnClickListenerPro
+import com.pmm.ui.ktx.toast
 import kotlinx.android.synthetic.main.activity_a.*
 
 @Station("/a")

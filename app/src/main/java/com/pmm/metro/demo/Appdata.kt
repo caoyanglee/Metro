@@ -1,9 +1,8 @@
 package com.pmm.metro.demo
 
 import android.util.Log
-import com.orhanobut.logger.Logger
 import com.pmm.metro.*
-import com.weimu.universalview.OriginAppData
+import com.pmm.ui.OriginAppData
 
 /**
  * Author:你需要一台永动机

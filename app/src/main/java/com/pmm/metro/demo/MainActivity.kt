@@ -4,14 +4,14 @@ import android.app.Activity
 import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
+import androidx.appcompat.app.AppCompatActivity
 import com.pmm.metro.Metro
 import com.pmm.metro.Station
 import com.pmm.metro.demo.transfer.UserCheckTransfer
-import com.weimu.universalview.ktx.setOnClickListenerPro
-import com.weimu.universalview.ktx.toast
+import com.pmm.ui.ktx.setOnClickListenerPro
+import com.pmm.ui.ktx.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 @Station("/main")

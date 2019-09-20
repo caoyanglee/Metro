@@ -1,7 +1,6 @@
 package com.pmm.metro.demo.transfer
 
 import android.util.Log
-import com.orhanobut.logger.Logger
 import com.pmm.metro.Ticket
 import com.pmm.metro.Transfer
 

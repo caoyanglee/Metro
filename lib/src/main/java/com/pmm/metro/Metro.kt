@@ -4,9 +4,8 @@ import android.app.Activity
 import android.app.Application
 import android.app.Service
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.View
+import androidx.fragment.app.Fragment
 import dalvik.system.DexFile
 import dalvik.system.PathClassLoader
 import java.io.IOException

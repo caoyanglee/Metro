@@ -3,8 +3,8 @@ package com.pmm.metro.lanuncher
 import android.app.Activity
 import android.content.Context
 import android.content.ServiceConnection
-import android.support.v4.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.pmm.metro.Dispatcher
 import com.pmm.metro.StationType
 
