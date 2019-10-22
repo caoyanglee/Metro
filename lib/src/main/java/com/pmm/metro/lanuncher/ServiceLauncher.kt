@@ -5,21 +5,25 @@ import android.content.Context
 import android.content.ServiceConnection
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.pmm.metro.Dispatcher
-import com.pmm.metro.StationType
+import com.pmm.metro.StationMeta
+import com.pmm.metro.Ticket
 
 /**
  * Author:你需要一台永动机
  * Date:2019-06-13 17:49
  * Description: 启动Service
  */
-class ServiceLauncher(private val dispatcher: Dispatcher) {
+class ServiceLauncher(
+    station: StationMeta?,
+    ticket: Ticket,
+    driver: Any
+) : AbstractLauncher(station, ticket, driver) {
 
     //开启Service
     fun go() {
-        val station = dispatcher.getStation(StationType.SERVICE) ?: return
-        val intent = dispatcher.getTicket().intent
-        when (val driver = dispatcher.getDriver()) {
+        if (station == null) return
+        val intent = ticket.intent
+        when (driver) {
             is Activity -> {
                 driver.startService(intent.setClass(driver, station.destination))
             }
@@ -42,9 +46,9 @@ class ServiceLauncher(private val dispatcher: Dispatcher) {
         conn: ServiceConnection,
         flags: Int = Context.BIND_AUTO_CREATE
     ) {
-        val station = dispatcher.getStation(StationType.SERVICE) ?: return
-        val intent = dispatcher.getTicket().intent
-        when (val driver = dispatcher.getDriver()) {
+        if (station == null) return
+        val intent = ticket.intent
+        when (driver) {
             is Activity -> {
                 driver.bindService(intent.setClass(driver, station.destination), conn, flags)
             }

@@ -295,7 +295,8 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
     }
 
     //获取站点
-    fun getStation(type: StationType): StationMeta? {
+    @Throws(IllegalArgumentException::class)
+    private fun getStation(type: StationType): StationMeta? {
         //全局 中转站
         for (item in MetroMap.getTransfers()) {
             ticket = item.transfer(ticket)
@@ -304,35 +305,29 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
         for (item in transfers) {
             ticket = item.transfer(ticket)
         }
-        val station = MetroMap.findStation(ticket.path)//查询车站
-        if (station == null) {
-            failCallback?.invoke(IllegalArgumentException("Route = ${ticket.path} is no Found！"))
-            return null
-        }
-        if (station.type != type) {
-            failCallback?.invoke(IllegalArgumentException("Route = ${ticket.path} is no the ${type} type"))
-            return null
+        var station: StationMeta? = null
+        try {
+            station = MetroMap.findStation(ticket.path)
+            if (station.type != type) {
+                throw IllegalArgumentException("path ${ticket.path} is no the $type type")
+            }
+        } catch (e: Exception) {
+            this.failCallback?.invoke(e)
         }
         return station
     }
 
-    //获取票
-    fun getTicket() = ticket
-
-    //获取驱动者
-    fun getDriver() = driver
-
     //开启Activity
-    fun go(requestCode: Int = -1) = activityLauncher().go(requestCode)
+    fun go(requestCode: Int = -1) = activityLauncher().go()
 
     //转换Activity
-    fun activityLauncher() = ActivityLauncher(this)
+    fun activityLauncher() = ActivityLauncher(getStation(StationType.ACTIVITY), ticket, driver)
 
     //转换Service
-    fun serviceLauncher() = ServiceLauncher(this)
+    fun serviceLauncher() = ServiceLauncher(getStation(StationType.SERVICE), ticket, driver)
 
     //转换Fragment
-    fun fragmentLauncher() = FragmentLauncher(this)
+    fun fragmentLauncher() = FragmentLauncher(getStation(StationType.SERVICE), ticket, driver)
 
     //错误回调
     fun fail(failCallback: ((e: Exception) -> Unit)) = this.apply {

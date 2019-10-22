@@ -5,28 +5,32 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.pmm.metro.Dispatcher
-import com.pmm.metro.StationType
+import com.pmm.metro.*
 
 /**
  * Author:你需要一台永动机
  * Date:2019-06-13 17:46
  * Description: 启动Activity
  */
-class ActivityLauncher(private val dispatcher: Dispatcher) {
+class ActivityLauncher(
+    station: StationMeta?,
+    ticket: Ticket,
+    driver: Any
+) : AbstractLauncher(station, ticket, driver) {
 
     fun go(requestCode: Int = -1) {
-        val station = dispatcher.getStation(StationType.ACTIVITY) ?: return
-
-        val ticket = dispatcher.getTicket()
+        if (station == null) return
         val intent = ticket.intent
         val enterAnim = ticket.enterAnim
         val exitAnim = ticket.exitAnim
 
-        when (val driver = dispatcher.getDriver()) {
+        when (driver) {
             is Activity -> {
                 if (requestCode != -1) {
-                    driver.startActivityForResult(intent.setClass(driver, station.destination), requestCode)
+                    driver.startActivityForResult(
+                        intent.setClass(driver, station.destination),
+                        requestCode
+                    )
                 } else {
                     driver.startActivity(intent.setClass(driver, station.destination))
                 }
@@ -40,7 +44,12 @@ class ActivityLauncher(private val dispatcher: Dispatcher) {
                         requestCode
                     )
                 } else {
-                    driver.startActivity(intent.setClass(driver.requireContext(), station.destination))
+                    driver.startActivity(
+                        intent.setClass(
+                            driver.requireContext(),
+                            station.destination
+                        )
+                    )
                 }
             }
             is Context -> {

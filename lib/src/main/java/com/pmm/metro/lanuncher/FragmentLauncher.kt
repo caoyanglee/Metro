@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.pmm.metro.Dispatcher
-import com.pmm.metro.StationType
+import com.pmm.metro.StationMeta
+import com.pmm.metro.Ticket
 import com.pmm.metro.ui.FragmentAy
 
 /**
@@ -14,14 +14,14 @@ import com.pmm.metro.ui.FragmentAy
  * Date:2019-06-13 18:20
  * Description: 启动Fragment
  */
-class FragmentLauncher(private val dispatcher: Dispatcher) {
-
+class FragmentLauncher(
+    station: StationMeta?,
+    ticket: Ticket,
+    driver: Any
+) : AbstractLauncher(station, ticket, driver) {
 
     fun go(requestCode: Int = -1) {
-        val station = dispatcher.getStation(StationType.FRAGMENT) ?: return
-
-
-        val ticket = dispatcher.getTicket()
+        if (station == null) return
         val intent = ticket.intent
         val enterAnim = ticket.enterAnim
         val exitAnim = ticket.exitAnim
@@ -30,7 +30,7 @@ class FragmentLauncher(private val dispatcher: Dispatcher) {
             arguments = intent.extras
         }
 
-        when (val driver = dispatcher.getDriver()) {
+        when (driver) {
             is Activity -> {
                 if (requestCode != -1) {
                     driver.startActivityForResult(
@@ -50,7 +50,12 @@ class FragmentLauncher(private val dispatcher: Dispatcher) {
                         requestCode
                     )
                 } else {
-                    driver.startActivity(intent.setClass(driver.requireContext(), FragmentAy::class.java))
+                    driver.startActivity(
+                        intent.setClass(
+                            driver.requireContext(),
+                            FragmentAy::class.java
+                        )
+                    )
                 }
             }
             is Context -> {

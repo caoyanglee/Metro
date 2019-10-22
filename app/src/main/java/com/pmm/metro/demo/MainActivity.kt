@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.pmm.metro.Metro
 import com.pmm.metro.Station
@@ -29,6 +30,9 @@ class MainActivity : AppCompatActivity() {
             Metro.with(this)
                 .path("/a?name=你需要一台永动机&age=27&url=$url")
                 .addTransfer(UserCheckTransfer())
+                .fail {
+                    Log.e("pmm", it.toString())
+                }
                 .go()
         }
 

@@ -11,9 +11,9 @@ object MetroMap {
     private val transfers = arrayListOf<Transfer>()//中转站集合
 
     //查询车站
-    fun findStation(path: String): StationMeta? {
-        //return stations[path] ?: throw IllegalArgumentException("the path $path not be founded!")
-        return stations[path]
+    @Throws(IllegalArgumentException::class)
+    fun findStation(path: String): StationMeta {
+        return stations[path] ?: throw IllegalArgumentException("the path $path not be founded!")
     }
 
     //增加车站
