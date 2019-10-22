@@ -24,10 +24,12 @@ object Metro {
         return Train(target)
     }
 
-    fun init(context: Application) {
-        //扫描所有带Station的类
-        val map = scan(context)
-        MetroMap.addStation(*map.toTypedArray())
+    fun init(context: Application, needSanStations: Boolean = true) {
+        if (needSanStations) {
+            //扫描所有带Station的类
+            val map = scan(context)
+            MetroMap.addStation(*map.toTypedArray())
+        }
 
         //增加全局 中转站
 //        MetroMap.addTransfer(object : TransferStation {
