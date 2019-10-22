@@ -27,7 +27,7 @@ class Ticket(path: String) {
                 val parasList = params.split("&")
                 for (item in parasList) {
                     val keyValue = item.split("=")
-                    attribute(keyValue[0], keyValue[1])
+                    put(keyValue[0], keyValue[1])
                 }
             } else {
                 field = value
@@ -38,123 +38,123 @@ class Ticket(path: String) {
         this.path = path
     }
 
-    fun attribute(name: String, value: Int) = this.apply {
+    fun put(name: String, value: Int) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Byte) = this.apply {
+    fun put(name: String, value: Byte) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Char) = this.apply {
+    fun put(name: String, value: Char) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Long) = this.apply {
+    fun put(name: String, value: Long) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Float) = this.apply {
+    fun put(name: String, value: Float) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Short) = this.apply {
+    fun put(name: String, value: Short) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Double) = this.apply {
+    fun put(name: String, value: Double) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Boolean) = this.apply {
+    fun put(name: String, value: Boolean) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Bundle) = this.apply {
+    fun put(name: String, value: Bundle) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: String) = this.apply {
+    fun put(name: String, value: String) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: IntArray) = this.apply {
+    fun put(name: String, value: IntArray) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: ByteArray) = this.apply {
+    fun put(name: String, value: ByteArray) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: CharArray) = this.apply {
+    fun put(name: String, value: CharArray) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: LongArray) = this.apply {
+    fun put(name: String, value: LongArray) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: FloatArray) = this.apply {
+    fun put(name: String, value: FloatArray) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: ShortArray) = this.apply {
+    fun put(name: String, value: ShortArray) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: DoubleArray) = this.apply {
+    fun put(name: String, value: DoubleArray) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: BooleanArray) = this.apply {
+    fun put(name: String, value: BooleanArray) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: CharSequence) = this.apply {
+    fun put(name: String, value: CharSequence) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Serializable) = this.apply {
+    fun put(name: String, value: Serializable) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Array<out String>) = this.apply {
+    fun put(name: String, value: Array<out String>) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Array<out Parcelable>) = this.apply {
+    fun put(name: String, value: Array<out Parcelable>) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attribute(name: String, value: Array<out CharSequence>) = this.apply {
+    fun put(name: String, value: Array<out CharSequence>) = this.apply {
         intent.putExtra(name, value)
     }
 
-    fun attributeIntList(name: String, value: ArrayList<Int>) = this.apply {
+    fun putIntList(name: String, value: ArrayList<Int>) = this.apply {
         intent.putIntegerArrayListExtra(name, value)
     }
 
-    fun attributeCharSequenceList(name: String, value: ArrayList<CharSequence>) = this.apply {
+    fun putCharSequenceList(name: String, value: ArrayList<CharSequence>) = this.apply {
         intent.putCharSequenceArrayListExtra(name, value)
     }
 
-    fun attributeParcelableList(name: String, value: ArrayList<Parcelable>) = this.apply {
+    fun putParcelableList(name: String, value: ArrayList<Parcelable>) = this.apply {
         intent.putParcelableArrayListExtra(name, value)
     }
 
-    fun attributeStringList(name: String, value: ArrayList<String>) = this.apply {
+    fun putStringList(name: String, value: ArrayList<String>) = this.apply {
         intent.putStringArrayListExtra(name, value)
     }
 
-    fun attribute(intent: Intent) = this.apply {
+    fun put(intent: Intent) = this.apply {
         this.intent.putExtras(intent)
     }
 
-    fun attribute(intent: Bundle) = this.apply {
-        this.intent.putExtras(intent)
+    fun put(bundle: Bundle) = this.apply {
+        this.intent.putExtras(bundle)
     }
 
-    fun clearAttributes() = this.apply {
+    private fun clearParams() = this.apply {
         this.intent.extras?.clear()
     }
 
@@ -163,14 +163,14 @@ class Ticket(path: String) {
         this.exitAnim = exitAnim
     }
 
-    fun clearOverridePendingTransition() = this.apply {
+    private fun clearOverridePendingTransition() = this.apply {
         this.enterAnim = 0
         this.exitAnim = 0
     }
 
     fun clear() {
         this.path = ""
-        clearAttributes()
+        clearParams()
         clearOverridePendingTransition()
     }
 }

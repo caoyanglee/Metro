@@ -41,10 +41,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         mBtnFragment.setOnClickListenerPro {
-            Metro.with(this).path("/fragment/test")
-                .attribute("id", 3)
-                .attribute("name", "你需要一台永动机")
-                .direct2Fragment()
+            Metro.with(this)
+                .path("/fragment/test")
+                .put("id", 3)
+                .put("name", "你需要一台永动机")
+                .fragmentLauncher()
                 .go()
         }
 
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         Metro.with(this)
             .path("/service/test")
-            .direct2Service()
+            .serviceLauncher()
             .go()
 //        startService(Intent(this, TestService::class.java))
 //        bindService(Intent(this, TestService::class.java), conn, Context.BIND_AUTO_CREATE)

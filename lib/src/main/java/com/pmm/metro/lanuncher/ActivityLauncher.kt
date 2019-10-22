@@ -11,7 +11,7 @@ import com.pmm.metro.StationType
 /**
  * Author:你需要一台永动机
  * Date:2019-06-13 17:46
- * Description:
+ * Description: 启动Activity
  */
 class ActivityLauncher(private val dispatcher: Dispatcher) {
 
