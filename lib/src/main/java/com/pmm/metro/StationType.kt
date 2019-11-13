@@ -9,5 +9,4 @@ enum class StationType(var code: Int, var className: String) {
     ACTIVITY(0, "activity"),
     SERVICE(1, "service"),
     FRAGMENT(2, "fragment")
-
 }

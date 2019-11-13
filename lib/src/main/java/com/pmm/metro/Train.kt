@@ -7,7 +7,7 @@ package com.pmm.metro
  */
 class Train(private val driver: Any) {
 
-    fun path(path: String) = Dispatcher(Ticket(path), driver)
+    fun path(path: String) = TrainDispatcher(Ticket(path), driver)
 
 }
 

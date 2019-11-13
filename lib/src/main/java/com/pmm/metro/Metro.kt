@@ -6,6 +6,7 @@ import android.app.Service
 import android.content.Context
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import dalvik.system.DexFile
 import dalvik.system.PathClassLoader
 import java.io.IOException
@@ -18,11 +19,26 @@ import java.io.IOException
  */
 object Metro {
 
-    fun with(target: Any): Train {
-        if (target !is Activity && (target !is Fragment) && (target !is Context) && (target !is View))
-            throw IllegalAccessException("target must be Activity,Fragment,Context or View")
-        return Train(target)
-    }
+    /**
+     * 使用Activity
+     */
+    fun with(target: Activity) = Train(target)
+
+    /**
+     * 使用Context
+     */
+    fun with(target: Context) = Train(target)
+
+    /**
+     * View
+     */
+    fun with(target: View) = Train(target.context)
+
+    /**
+     * Fragment
+     */
+    fun with(target: Fragment) = Train(target)
+
 
     fun init(context: Application, needSanStations: Boolean = true) {
         if (needSanStations) {

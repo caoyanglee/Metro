@@ -34,10 +34,6 @@ class ServiceLauncher(
             is Context -> {
                 driver.startService(intent.setClass(driver, station.destination))
             }
-            is View -> {
-                val target = driver.context
-                target.startService(intent.setClass(target, station.destination))
-            }
         }
     }
 
@@ -58,10 +54,6 @@ class ServiceLauncher(
             }
             is Context -> {
                 driver.bindService(intent.setClass(driver, station.destination), conn, flags)
-            }
-            is View -> {
-                val target = driver.context
-                target.bindService(intent.setClass(target, station.destination), conn, flags)
             }
         }
     }

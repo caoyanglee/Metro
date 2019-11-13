@@ -14,7 +14,7 @@ import java.lang.Exception
  * Date:2019-05-14 21:20
  * Description:
  */
-class Dispatcher(private var ticket: Ticket, private val driver: Any) {
+class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
 
     private val transfers = arrayListOf<Transfer>()//中转站集合
 
@@ -148,9 +148,7 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
         ticket.overridePendingTransition(enterAnim, exitAnim)
     }
 
-    //获取站点
-    @Throws(IllegalArgumentException::class)
-    private fun getStation(type: StationType): StationMeta? {
+    private fun doTransfer() {
         //全局 中转站
         for (item in MetroMap.getTransfers()) {
             ticket = item.transfer(ticket)
@@ -159,6 +157,13 @@ class Dispatcher(private var ticket: Ticket, private val driver: Any) {
         for (item in transfers) {
             ticket = item.transfer(ticket)
         }
+    }
+
+    //获取站点
+    private fun getStation(type: StationType): StationMeta? {
+        //转转站
+        doTransfer()
+        //寻找站点
         var station: StationMeta? = null
         try {
             station = MetroMap.findStation(ticket.path)

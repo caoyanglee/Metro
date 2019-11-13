@@ -58,13 +58,6 @@ class ActivityLauncher(
                     this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 })
             }
-            is View -> {
-                val context = driver.context
-                //context启动的Intent 不能带requestCode
-                context.startActivity(intent.setClass(context, station.destination).apply {
-                    this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                })
-            }
         }
     }
 }

@@ -64,13 +64,6 @@ class FragmentLauncher(
                     this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 })
             }
-            is View -> {
-                val context = driver.context
-                //context启动的Intent 不能带requestCode
-                context.startActivity(intent.setClass(context, FragmentAy::class.java).apply {
-                    this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                })
-            }
         }
     }
 }
