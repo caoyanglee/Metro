@@ -25,7 +25,7 @@ MetroMap.addStation("/main", MainActivity::class.java)
 ```kotlin
 Metro.with(this)
     .path("/main")
-    .attribute("currIndex", 1)
+    .put("currIndex", 1)
     .go()
 ```
 
@@ -37,10 +37,11 @@ Metro.init(this)
 **拦截器**
 ```kotlin
 //增加中转站（类似拦截器）
-MetroMap.addTransferStation(object : TransferStation {
-    override fun transfer(ticket: Ticket): Ticket {
+MetroMap.addTransferStation(object : Transfer {
+    override fun run(chain: Transfer.Chain): Ticket {
+        val ticket = chain.ticket()
         Logger.d("目的路径 = ${ticket.path}")
-        return ticket
+        return chain.proceed(ticket)
     }
 })
 ```
