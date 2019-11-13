@@ -3,9 +3,10 @@ package com.pmm.metro
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import com.pmm.metro.lanuncher.ActivityLauncher
-import com.pmm.metro.lanuncher.FragmentLauncher
-import com.pmm.metro.lanuncher.ServiceLauncher
+import com.pmm.metro.lanuncher.LauncherFactory
+import com.pmm.metro.transfer.LogTransfer
+import com.pmm.metro.transfer.Transfer
+import com.pmm.metro.transfer.TransferChain
 import java.io.Serializable
 import java.lang.Exception
 
@@ -148,21 +149,24 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
         ticket.overridePendingTransition(enterAnim, exitAnim)
     }
 
-    private fun doTransfer() {
-        //全局 中转站
-        for (item in MetroMap.getTransfers()) {
-            ticket = item.transfer(ticket)
+    //获取中转处理后的票
+    private fun getTicketAfterTransfer(): Ticket {
+        val transfers = arrayListOf<Transfer>()
+        transfers.addAll(this.transfers)//局部 中转站
+        transfers.addAll(MetroMap.getTransfers())//全局 中转站
+        transfers.add(LogTransfer())//基础 中转站
+
+        if (transfers.isNotEmpty()) {
+            val chain: Transfer.Chain = TransferChain(transfers, 0, ticket)
+            ticket = chain.proceed(ticket)
         }
-        //局部 中转站
-        for (item in transfers) {
-            ticket = item.transfer(ticket)
-        }
+        return ticket
     }
 
     //获取站点
     private fun getStation(type: StationType): StationMeta? {
-        //转转站
-        doTransfer()
+        //获取票
+        val ticket = getTicketAfterTransfer()
         //寻找站点
         var station: StationMeta? = null
         try {
@@ -180,13 +184,15 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
     fun go(requestCode: Int = -1) = activityLauncher().go()
 
     //转换Activity
-    fun activityLauncher() = ActivityLauncher(getStation(StationType.ACTIVITY), ticket, driver)
+    fun activityLauncher() =
+        LauncherFactory.activity(getStation(StationType.ACTIVITY), ticket, driver)
 
     //转换Service
-    fun serviceLauncher() = ServiceLauncher(getStation(StationType.SERVICE), ticket, driver)
+    fun serviceLauncher() = LauncherFactory.service(getStation(StationType.SERVICE), ticket, driver)
 
     //转换Fragment
-    fun fragmentLauncher() = FragmentLauncher(getStation(StationType.SERVICE), ticket, driver)
+    fun fragmentLauncher() =
+        LauncherFactory.fragment(getStation(StationType.SERVICE), ticket, driver)
 
     //错误回调
     fun fail(failCallback: ((e: Exception) -> Unit)) = this.apply {

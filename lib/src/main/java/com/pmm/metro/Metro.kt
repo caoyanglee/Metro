@@ -49,7 +49,7 @@ object Metro {
 
         //增加全局 中转站
 //        MetroMap.addTransfer(object : TransferStation {
-//            override fun transfer(path: String): String {
+//            override fun run(path: String): String {
 //                Logger.d("目的站=${path}")
 //                return path
 //            }

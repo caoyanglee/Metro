@@ -2,6 +2,7 @@ package com.pmm.metro.demo
 
 import android.util.Log
 import com.pmm.metro.*
+import com.pmm.metro.transfer.Transfer
 import com.pmm.ui.OriginAppData
 
 /**
@@ -15,9 +16,7 @@ class Appdata : OriginAppData() {
 
     override fun onCreate() {
         super.onCreate()
-
         MetroConfig()
-
     }
 
     private fun MetroConfig() {
@@ -25,9 +24,11 @@ class Appdata : OriginAppData() {
 
         //中转站
         MetroMap.addTransfer(object : Transfer {
-            override fun transfer(ticket: Ticket): Ticket {
+
+            override fun run(chain: Transfer.Chain): Ticket {
+                val ticket = chain.ticket()
                 Log.d("metro", "目的站=${ticket.path}")
-                return ticket
+                return chain.proceed(ticket)
             }
         })
         //代码方式 增加站点
