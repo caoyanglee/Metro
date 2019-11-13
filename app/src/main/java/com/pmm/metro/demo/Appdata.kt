@@ -16,17 +16,21 @@ class Appdata : OriginAppData() {
     override fun onCreate() {
         super.onCreate()
 
+        MetroConfig()
+
+    }
+
+    private fun MetroConfig() {
         Metro.init(this)
 
         //中转站
         MetroMap.addTransfer(object : Transfer {
             override fun transfer(ticket: Ticket): Ticket {
-                Log.d("metro","目的站=${ticket.path}")
+                Log.d("metro", "目的站=${ticket.path}")
                 return ticket
             }
         })
         //代码方式 增加站点
         MetroMap.addStation("/index", MainActivity::class.java)
-
     }
 }
