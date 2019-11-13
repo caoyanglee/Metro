@@ -13,7 +13,7 @@ class UserCheckTransfer : Transfer {
     private val isLogin = false
 
 
-    override fun run(chain: Transfer.Chain): Ticket {
+    override fun transfer(chain: Transfer.Chain): Ticket {
         val ticket = chain.ticket()
         if (!isLogin) {
             ticket.path = "/b"

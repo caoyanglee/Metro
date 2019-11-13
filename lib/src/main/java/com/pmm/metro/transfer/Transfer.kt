@@ -9,7 +9,7 @@ import com.pmm.metro.Ticket
  */
 interface Transfer {
 
-    fun run(chain: Chain): Ticket
+    fun transfer(chain: Chain): Ticket
 
     interface Chain {
         fun ticket(): Ticket

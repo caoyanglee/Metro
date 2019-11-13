@@ -16,6 +16,6 @@ class TransferChain(var transfers: List<Transfer>, var index: Int, var ticket: T
 
         val next: Transfer.Chain = TransferChain(transfers, index + 1, ticket)
         val transfer = transfers[index]
-        return transfer.run(next)
+        return transfer.transfer(next)
     }
 }

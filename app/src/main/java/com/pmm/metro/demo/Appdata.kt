@@ -25,7 +25,7 @@ class Appdata : OriginAppData() {
         //中转站
         MetroMap.addTransfer(object : Transfer {
 
-            override fun run(chain: Transfer.Chain): Ticket {
+            override fun transfer(chain: Transfer.Chain): Ticket {
                 val ticket = chain.ticket()
                 Log.d("metro", "目的站=${ticket.path}")
                 return chain.proceed(ticket)

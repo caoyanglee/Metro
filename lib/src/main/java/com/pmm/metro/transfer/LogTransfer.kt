@@ -1,6 +1,7 @@
 package com.pmm.metro.transfer
 
 import android.util.Log
+import com.pmm.metro.BuildConfig
 import com.pmm.metro.Ticket
 
 /**
@@ -10,9 +11,10 @@ import com.pmm.metro.Ticket
  */
 class LogTransfer : Transfer {
 
-    override fun run(chain: Transfer.Chain): Ticket {
+    override fun transfer(chain: Transfer.Chain): Ticket {
         val ticket = chain.ticket()
-        Log.d("metro", "station=${ticket.path} intent=${ticket.intent.extras}")
+        if (BuildConfig.DEBUG)
+            Log.d("metro", "station=${ticket.path} intent=${ticket.intent.extras}")
         return ticket
     }
 }
