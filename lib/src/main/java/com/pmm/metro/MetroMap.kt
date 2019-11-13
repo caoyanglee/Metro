@@ -22,7 +22,7 @@ object MetroMap {
     @Throws(IllegalStateException::class)
     fun findStation(path: String, type: StationType): StationMeta {
         val station = checkNotNull(stations[path], lazyMessage = { "the path $path not be founded!" })
-        check(station.type != type, lazyMessage = { "path $path is no the ${type.name} type" })
+        check(station.type == type, lazyMessage = { "path $path is no the ${type.name} type" })
         return station
     }
 
