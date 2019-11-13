@@ -9,6 +9,8 @@ class Train(private val driver: Any) {
 
     fun path(path: String) = TrainDispatcher(Ticket(path), driver)
 
+    fun path(ticket: Ticket) = TrainDispatcher(ticket, driver)
+
 }
 
 
