@@ -167,7 +167,7 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
     }
 
     //获取站点
-    private fun getStation(type: StationType): StationMeta? {
+    private fun findStation(type: StationType): StationMeta? {
         //获取票
         val ticket = getTicketAfterTransfer()
         //寻找站点
@@ -186,21 +186,21 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
     //转换Activity
     fun activityLauncher(): ActivityLauncher {
         val type = StationType.ACTIVITY
-        val station = getStation(type)
+        val station = findStation(type)
         return LauncherFactory.create(type, station, ticket, driver) as ActivityLauncher
     }
 
     //转换Service
     fun serviceLauncher(): ServiceLauncher {
         val type = StationType.SERVICE
-        val station = getStation(type)
+        val station = findStation(type)
         return LauncherFactory.create(type, station, ticket, driver) as ServiceLauncher
     }
 
     //转换Fragment
     fun fragmentLauncher(): FragmentLauncher {
         val type = StationType.FRAGMENT
-        val station = getStation(type)
+        val station = findStation(type)
         return LauncherFactory.create(type, station, ticket, driver) as FragmentLauncher
     }
 

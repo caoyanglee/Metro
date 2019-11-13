@@ -13,16 +13,16 @@ object MetroMap {
     private val transfers = arrayListOf<Transfer>()//中转站集合
 
     //查询车站
-    @Throws(IllegalArgumentException::class)
+    @Throws(IllegalStateException::class)
     fun findStation(path: String): StationMeta {
-        return stations[path] ?: throw IllegalArgumentException("the path $path not be founded!")
+        return checkNotNull(stations[path], lazyMessage = { "the path $path not be founded!" })
     }
 
     //查询车站
-    @Throws(IllegalArgumentException::class)
+    @Throws(IllegalStateException::class)
     fun findStation(path: String, type: StationType): StationMeta {
-        val station = stations[path] ?: throw IllegalArgumentException("the path $path not be founded!")
-        if (station.type != type) throw IllegalArgumentException("path ${path} is no the $type type")
+        val station = checkNotNull(stations[path], lazyMessage = { "the path $path not be founded!" })
+        check(station.type != type, lazyMessage = { "path $path is no the ${type.name} type" })
         return station
     }
 
