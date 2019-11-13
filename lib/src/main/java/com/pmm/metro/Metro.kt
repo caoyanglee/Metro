@@ -18,6 +18,11 @@ import java.io.IOException
  * Description:
  */
 object Metro {
+    
+    /**
+     * 是否开启日志，默认开启
+     */
+    var enableLog = true
 
     /**
      * 使用Activity
