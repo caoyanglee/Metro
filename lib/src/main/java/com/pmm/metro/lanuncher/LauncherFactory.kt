@@ -1,24 +1,30 @@
 package com.pmm.metro.lanuncher
 
-import com.pmm.metro.MetroMap
 import com.pmm.metro.StationMeta
 import com.pmm.metro.StationType
 import com.pmm.metro.Ticket
-import java.lang.Exception
+import java.lang.reflect.InvocationHandler
+import java.lang.reflect.Method
+import java.lang.reflect.Proxy
 
 /**
  * Author:你需要一台永动机
  * Date:2019-11-13 11:50
- * Description:
+ * Description:简单工厂模式
  */
 object LauncherFactory {
 
-    //转换Activity
-    fun activity(station: StationMeta?, ticket: Ticket, driver: Any) = ActivityLauncher(station, ticket, driver)
-
-    //转换Service
-    fun service(station: StationMeta?, ticket: Ticket, driver: Any) = ServiceLauncher(station, ticket, driver)
-
-    //转换Fragment
-    fun fragment(station: StationMeta?, ticket: Ticket, driver: Any) = FragmentLauncher(station, ticket, driver)
+    //静态创建方法
+    fun create(
+        type: StationType,
+        station: StationMeta?,
+        ticket: Ticket,
+        driver: Any
+    ): AbstractLauncher {
+        return when (type) {
+            StationType.ACTIVITY -> ActivityLauncher(station, ticket, driver)
+            StationType.SERVICE -> ServiceLauncher(station, ticket, driver)
+            StationType.FRAGMENT -> FragmentLauncher(station, ticket, driver)
+        }
+    }
 }

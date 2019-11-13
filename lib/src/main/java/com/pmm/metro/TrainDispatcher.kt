@@ -3,7 +3,10 @@ package com.pmm.metro
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import com.pmm.metro.lanuncher.ActivityLauncher
+import com.pmm.metro.lanuncher.FragmentLauncher
 import com.pmm.metro.lanuncher.LauncherFactory
+import com.pmm.metro.lanuncher.ServiceLauncher
 import com.pmm.metro.transfer.LogTransfer
 import com.pmm.metro.transfer.Transfer
 import com.pmm.metro.transfer.TransferChain
@@ -170,10 +173,7 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
         //寻找站点
         var station: StationMeta? = null
         try {
-            station = MetroMap.findStation(ticket.path)
-            if (station.type != type) {
-                throw IllegalArgumentException("path ${ticket.path} is no the $type type")
-            }
+            station = MetroMap.findStation(ticket.path, type)
         } catch (e: Exception) {
             this.failCallback?.invoke(e)
         }
@@ -184,15 +184,25 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
     fun go(requestCode: Int = -1) = activityLauncher().go()
 
     //转换Activity
-    fun activityLauncher() =
-        LauncherFactory.activity(getStation(StationType.ACTIVITY), ticket, driver)
+    fun activityLauncher(): ActivityLauncher {
+        val type = StationType.ACTIVITY
+        val station = getStation(type)
+        return LauncherFactory.create(type, station, ticket, driver) as ActivityLauncher
+    }
 
     //转换Service
-    fun serviceLauncher() = LauncherFactory.service(getStation(StationType.SERVICE), ticket, driver)
+    fun serviceLauncher(): ServiceLauncher {
+        val type = StationType.SERVICE
+        val station = getStation(type)
+        return LauncherFactory.create(type, station, ticket, driver) as ServiceLauncher
+    }
 
     //转换Fragment
-    fun fragmentLauncher() =
-        LauncherFactory.fragment(getStation(StationType.SERVICE), ticket, driver)
+    fun fragmentLauncher(): FragmentLauncher {
+        val type = StationType.FRAGMENT
+        val station = getStation(type)
+        return LauncherFactory.create(type, station, ticket, driver) as FragmentLauncher
+    }
 
     //错误回调
     fun fail(failCallback: ((e: Exception) -> Unit)) = this.apply {

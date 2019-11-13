@@ -18,6 +18,14 @@ object MetroMap {
         return stations[path] ?: throw IllegalArgumentException("the path $path not be founded!")
     }
 
+    //查询车站
+    @Throws(IllegalArgumentException::class)
+    fun findStation(path: String, type: StationType): StationMeta {
+        val station = stations[path] ?: throw IllegalArgumentException("the path $path not be founded!")
+        if (station.type != type) throw IllegalArgumentException("path ${path} is no the $type type")
+        return station
+    }
+
     //增加车站
     fun addStation(
         path: String,
