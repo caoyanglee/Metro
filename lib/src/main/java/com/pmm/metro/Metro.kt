@@ -82,7 +82,7 @@ object Metro {
                 val element = n.nextElement()
                 //scan all classes 扫所有的类
                 val entryClass = df.loadClass(element, classLoader) ?: continue
-                val station = entryClass.getAnnotation<Station>(Station::class.java) ?: continue
+                val station = entryClass.getAnnotation<Station>(Station::class.java) ?: continue //reflect 反射
                 //get type 获取类型
                 val type = when {
                     Activity::class.java.isAssignableFrom(entryClass) -> StationType.ACTIVITY

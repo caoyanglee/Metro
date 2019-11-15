@@ -15,8 +15,8 @@ object MetroMap {
     //查询车站
     @Throws(IllegalStateException::class)
     fun findStation(path: String, type: StationType? = null): StationMeta {
-        val station = checkNotNull(stations[path], lazyMessage = { "the path $path not be founded!\n路径找不到！" })
-        if (type != null) check(station.type == type, lazyMessage = { "path $path is no the ${type.name} type\n路径${path}不是${type.name}类型" })
+        val station = checkNotNull(stations[path], lazyMessage = { "the path $path not be founded! 路径${path}找不到！" })
+        if (type != null) check(station.type == type, lazyMessage = { "path $path is no the ${type.name} type 路径${path}不是${type.name}类型" })
         return station
     }
 
