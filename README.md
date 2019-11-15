@@ -38,6 +38,7 @@ Metro.init(this)
 ```kotlin
 //增加中转站（类似拦截器）
 MetroMap.addTransferStation(object : Transfer {
+
     override fun run(chain: Transfer.Chain): Ticket {
         val ticket = chain.ticket()
         Logger.d("目的路径 = ${ticket.path}")
