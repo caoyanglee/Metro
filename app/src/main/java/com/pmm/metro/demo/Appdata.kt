@@ -10,7 +10,7 @@ import com.pmm.ui.OriginAppData
  * Date:2019-05-14 14:40
  * Description:
  */
-class Appdata : OriginAppData() {
+class AppData : OriginAppData() {
 
     override fun isDebug(): Boolean = BuildConfig.DEBUG
 
@@ -27,7 +27,7 @@ class Appdata : OriginAppData() {
 
             override fun transfer(chain: Transfer.Chain): Ticket {
                 val ticket = chain.ticket()
-                Log.d("metro", "目的站=${ticket.path}")
+                Log.d("metro", "全局中转站：目的站=${ticket.path}")
                 return chain.proceed(ticket)
             }
         })

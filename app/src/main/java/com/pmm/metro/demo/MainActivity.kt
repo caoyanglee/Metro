@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 .path("/a?name=你需要一台永动机&age=27&url=$url")
                 .addTransfer(UserCheckTransfer())
                 .fail {
-                    Log.e("pmm", it.toString())
+                    Log.e("metro", it.toString())
                 }
                 .go()
         }
