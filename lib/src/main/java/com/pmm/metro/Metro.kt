@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.app.Service
 import android.content.Context
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -18,51 +19,55 @@ import java.io.IOException
  * Description:
  */
 object Metro {
-    
+
     /**
+     * whether enable log or not,default true
+     *
      * 是否开启日志，默认开启
      */
     var enableLog = true
 
     /**
-     * 使用Activity
+     * use Activity
      */
     fun with(target: Activity) = Train(target)
 
     /**
-     * 使用Context
+     * use Context
      */
     fun with(target: Context) = Train(target)
 
     /**
-     * View
+     * use View
      */
     fun with(target: View) = Train(target.context)
 
     /**
-     * Fragment
+     * use Fragment
      */
     fun with(target: Fragment) = Train(target)
 
 
+    /**
+     * init the lib
+     *
+     * 初始化库
+     */
     fun init(context: Application, needSanStations: Boolean = true) {
         if (needSanStations) {
-            //扫描所有带Station的类
-            val map = scan(context)
-            MetroMap.addStation(*map.toTypedArray())
+            val stations = scan(context)
+            MetroMap.addStation(stations)
         }
-
-        //增加全局 中转站
-//        MetroMap.addTransfer(object : TransferStation {
-//            override fun transfer(path: String): String {
-//                Logger.d("目的站=${path}")
-//                return path
-//            }
-//        })
     }
 
     /**
+     * scan all class with @Station Annotation,
+     * this method suit for small project,
+     * if you are the big one,recommend use MetroMap.addStation() by hand
+     *
      * 扫描所有代理有@Staion的类，并返回Map集合
+     * 此方法适合小项目，类少！
+     * 大项目建议使用MetroMap.addStation()手动添加
      */
     private fun scan(context: Context): List<StationMeta> {
         val stationsList = arrayListOf<StationMeta>()
@@ -71,30 +76,23 @@ object Metro {
 
             val df = DexFile(context.packageCodePath)
             val n = df.entries()
+            var i = 0;
             while (n.hasMoreElements()) {
+                i++
                 val element = n.nextElement()
-                //扫所有的类
-                val entryClass = df.loadClass(element, classLoader)
-                if (entryClass != null) {
-                    val annotation = entryClass.getAnnotation<Station>(Station::class.java)
-                    if (annotation != null) {
-                        val station = annotation as Station
-
-                        val type = when {
-                            Activity::class.java.isAssignableFrom(entryClass) -> StationType.ACTIVITY
-                            Service::class.java.isAssignableFrom(entryClass) -> StationType.SERVICE
-                            Fragment::class.java.isAssignableFrom(entryClass) -> StationType.FRAGMENT
-                            else -> StationType.ACTIVITY
-                        }
-                        stationsList.add(
-                            StationMeta(
-                                path = station.path,
-                                destination = entryClass,
-                                type = type
-                            )
-                        )
-                    }
+                //scan all classes 扫所有的类
+                val entryClass = df.loadClass(element, classLoader) ?: continue
+                val station = entryClass.getAnnotation<Station>(Station::class.java) ?: continue
+                //get type 获取类型
+                val type = when {
+                    Activity::class.java.isAssignableFrom(entryClass) -> StationType.ACTIVITY
+                    Service::class.java.isAssignableFrom(entryClass) -> StationType.SERVICE
+                    Fragment::class.java.isAssignableFrom(entryClass) -> StationType.FRAGMENT
+                    else -> StationType.ACTIVITY
                 }
+                stationsList.add(
+                    StationMeta(path = station.path, destination = entryClass, type = type)
+                )
             }
         } catch (e1: IOException) {
             e1.printStackTrace()

@@ -5,8 +5,8 @@ package com.pmm.metro
  * Date:2019-05-17 02:20
  * Description:
  */
-enum class StationType(var code: Int) {
-    ACTIVITY(0),
-    SERVICE(1),
-    FRAGMENT(2)
+enum class StationType() {
+    ACTIVITY,
+    SERVICE,
+    FRAGMENT
 }
