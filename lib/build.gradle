@@ -36,6 +36,5 @@ dependencies {
     //kt
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //annotation
-    compile project(':annotation')
-
+    compile 'com.github.caoyanglee.Metro:annotation:0.2.32'
 }
