@@ -1,6 +1,10 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
+// JitPack Maven
+apply plugin: 'maven'
+// Your Group
+group = 'com.github.caoyanglee'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
