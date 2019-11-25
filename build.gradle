@@ -4,24 +4,24 @@ buildscript {
     //版本
     ext.versions = [
             'minSdk'    : 21,
-            'compileSdk': 28,
-            'targetSdk' : 28,
+            'compileSdk': 29,
+            'targetSdk' : 29,
     ]
     //依赖
     ext.deps = [
-            'core'     : [
-                    'ui'         : 'com.github.caoyanglee:universalui:0.5.1-alpha',
+            'core': [
+                    'ui': 'com.github.caoyanglee:universalui:0.5.53',
             ]
     ]
     //常规
-    ext.kotlin_version = '1.3.50'
+    ext.kotlin_version = '1.3.60'
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.1'
+        classpath 'com.android.tools.build:gradle:3.5.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         // NOTE: Do not place your application dependencies here; they belong
@@ -34,7 +34,7 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
-        
+
     }
 }
 

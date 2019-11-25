@@ -4,10 +4,10 @@ import android.app.Activity
 import android.app.Application
 import android.app.Service
 import android.content.Context
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
+import com.pmm.metro.annotatoin.Station
+import com.pmm.metro.annotatoin.StationType
 import dalvik.system.DexFile
 import dalvik.system.PathClassLoader
 import java.io.IOException
@@ -19,6 +19,8 @@ import java.io.IOException
  * Description:
  */
 object Metro {
+
+    private lateinit var context: Application
 
     /**
      * whether enable log or not,default true
@@ -53,12 +55,23 @@ object Metro {
      *
      * 初始化库
      */
-    fun init(context: Application, needSanStations: Boolean = true) {
-        if (needSanStations) {
-            val stations = scan(context)
-            MetroMap.addStation(stations)
-        }
+    fun init(context: Application) {
+        this.context = context
+//        if (needSanStations) {
+//            val stations = scan(context)
+//            MetroMap.addStation(stations)
+//        }
+        val clazz = Class.forName("com.pmm.metro.route.MetroRoute")
+        val method = clazz.getMethod("loadRouter")
+        method.invoke(null)
     }
+
+    /**
+     * get Context of Application
+     *
+     * 获取应用层级的上下文
+     */
+    fun getContext() = context
 
     /**
      * scan all class with @Station Annotation,
@@ -82,7 +95,7 @@ object Metro {
                 val element = n.nextElement()
                 //scan all classes 扫所有的类
                 val entryClass = df.loadClass(element, classLoader) ?: continue
-                val station = entryClass.getAnnotation<Station>(Station::class.java) ?: continue //reflect 反射
+                val station = entryClass.getAnnotation(Station::class.java) ?: continue //reflect 反射
                 //get type 获取类型
                 val type = when {
                     Activity::class.java.isAssignableFrom(entryClass) -> StationType.ACTIVITY

@@ -1,11 +1,8 @@
 package com.pmm.metro.lanuncher
 
 import com.pmm.metro.StationMeta
-import com.pmm.metro.StationType
+import com.pmm.metro.annotatoin.StationType
 import com.pmm.metro.Ticket
-import java.lang.reflect.InvocationHandler
-import java.lang.reflect.Method
-import java.lang.reflect.Proxy
 
 /**
  * Author:你需要一台永动机

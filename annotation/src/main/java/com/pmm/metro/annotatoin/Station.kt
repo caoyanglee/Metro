@@ -1,6 +1,4 @@
-package com.pmm.metro
-
-import java.lang.annotation.RetentionPolicy
+package com.pmm.metro.annotatoin
 
 /**
  * Author:你需要一台永动机
@@ -8,7 +6,7 @@ import java.lang.annotation.RetentionPolicy
  * Description:
  */
 @Target(AnnotationTarget.CLASS)
-@Retention(AnnotationRetention.RUNTIME)//不设置默认为RunTime,非RunTime无法动态获取注解数据
+@Retention(AnnotationRetention.BINARY)//不设置默认为RunTime,非RunTime无法动态获取注解数据
 @MustBeDocumented
 annotation class Station(
     val path: String = ""

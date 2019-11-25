@@ -10,7 +10,7 @@ import com.pmm.metro.Ticket
  * Date:2019-11-13 11:30
  * Description:
  */
-class LogTransfer : Transfer {
+internal class LogTransfer : Transfer {
 
     override fun transfer(chain: Transfer.Chain): Ticket {
         val ticket = chain.ticket()

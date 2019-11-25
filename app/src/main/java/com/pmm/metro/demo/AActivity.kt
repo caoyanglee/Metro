@@ -4,9 +4,8 @@ import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.pmm.metro.Metro
-import com.pmm.metro.Station
-import com.pmm.metro.StationMeta
-import com.pmm.ui.ktx.setOnClickListenerPro
+import com.pmm.metro.annotatoin.Station
+import com.pmm.ui.ktx.click
 import com.pmm.ui.ktx.toast
 import kotlinx.android.synthetic.main.activity_a.*
 
@@ -27,11 +26,11 @@ class AActivity : AppCompatActivity() {
             url = $url
         """.trimIndent()
         )
-        mTvJump.setOnClickListenerPro {
+        mTvJump.click {
             Metro.with(this).path("/b").go()
         }
 
-        mBtnBack.setOnClickListenerPro {
+        mBtnBack.click {
             setResult(Activity.RESULT_OK)
             onBackPressed()
         }

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 // JitPack Maven
 apply plugin: 'com.github.dcendents.android-maven'
@@ -7,7 +8,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.caoyanglee'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion versions.compileSdk
 
     defaultConfig {
         minSdkVersion versions.minSdk
@@ -34,4 +35,7 @@ dependencies {
     compile 'androidx.appcompat:appcompat:1.1.0'
     //kt
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //annotation
+    compile project(':annotation')
+
 }

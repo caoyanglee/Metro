@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
-import com.pmm.metro.Station
+import com.pmm.metro.annotatoin.Station
 import com.pmm.ui.core.fragment.BaseFragment
 
 /**
