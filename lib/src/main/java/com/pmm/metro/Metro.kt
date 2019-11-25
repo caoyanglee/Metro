@@ -61,9 +61,13 @@ object Metro {
 //            val stations = scan(context)
 //            MetroMap.addStation(stations)
 //        }
-        val clazz = Class.forName("com.pmm.metro.route.MetroRoute")
-        val method = clazz.getMethod("loadRouter")
-        method.invoke(null)
+        try {
+            val clazz = Class.forName("com.pmm.metro.route.MetroRoute")
+            val method = clazz.getMethod("loadRouter")
+            method.invoke(null)
+        } catch (e: Exception) {
+            //nothing
+        }
     }
 
     /**
