@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 // JitPack Maven
 apply plugin: 'com.github.dcendents.android-maven'
 // Your Group
-group = 'com.pmm'
+group = 'com.github.caoyanglee'
 
 android {
     compileSdkVersion versions.compileSdk

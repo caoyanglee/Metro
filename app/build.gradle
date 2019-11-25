@@ -35,9 +35,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //universal-ui
     implementation deps.core.ui
-
-
-
     implementation project(':lib')
     kapt project(':compiler')
     testImplementation 'junit:junit:4.12'
