@@ -67,7 +67,7 @@ class MetroProcessor : AbstractProcessor() {
 
             this.messager?.printMessage(
                 Diagnostic.Kind.WARNING,
-                "=============> 路径=${station.path} 类=${te.asClassName()} ${getPackageName(te)}"
+                "=============> 路径=${station.path} 类=${te.asClassName()}}"
             )
         }
 
@@ -92,7 +92,6 @@ class MetroProcessor : AbstractProcessor() {
         val file = fileBuilder
             .addType(metroRoutes).build()
         file.writeFile()
-        this.messager?.printMessage(Diagnostic.Kind.NOTE, "=============> RouterProcessor 已经生效")
         return true
     }
 
