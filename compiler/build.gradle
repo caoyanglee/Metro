@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'maven'
 
-group = 'com.github.caoyanglee'
+group = 'com.pmm'
 
 
 dependencies {
