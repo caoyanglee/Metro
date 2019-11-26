@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-kapt {
-    arguments {
-        arg("metroModuleName", project.getName())
-    }
-}
+//kapt {
+//    arguments {
+//        arg("metroModuleName", project.getName())
+//    }
+//}
 
 android {
     compileSdkVersion versions.compileSdk

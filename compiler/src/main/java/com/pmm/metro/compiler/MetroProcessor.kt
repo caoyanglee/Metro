@@ -40,7 +40,7 @@ class MetroProcessor : AbstractProcessor() {
         // 保存 messager 对象
         this.messager = processingEnv?.messager
 
-        moduleName = processingEnv?.options?.get("metroModuleName") ?: "${UUID.randomUUID()}"
+        moduleName = processingEnv?.options?.get("metroModuleName") ?: "${UUID.randomUUID()}".replace("-","")
     }
 
 
