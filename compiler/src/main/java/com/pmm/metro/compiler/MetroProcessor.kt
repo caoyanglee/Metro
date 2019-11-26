@@ -51,7 +51,7 @@ class MetroProcessor : AbstractProcessor() {
 
         val fileBuilder = FileSpec.builder(
             packageName = "com.pmm.metro.route",
-            fileName = "MetroRoute"
+            fileName = "MetroRoute_$moduleName"
         ).addImport("com.pmm.metro", "MetroMap")
 
         if (roundEnv == null) return true
@@ -84,7 +84,7 @@ class MetroProcessor : AbstractProcessor() {
         val initFun = loadFunBuilder.build()
 
         //类
-        val metroRoutes = TypeSpec.objectBuilder("MetroRoute")
+        val metroRoutes = TypeSpec.objectBuilder("MetroRoute_$moduleName")
             .addFunction(initFun)
             .build()
 
