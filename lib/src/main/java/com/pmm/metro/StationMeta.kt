@@ -1,6 +1,5 @@
 package com.pmm.metro
 
-import com.pmm.metro.annotatoin.StationType
 
 /**
  * Author:你需要一台永动机

@@ -3,7 +3,6 @@ package com.pmm.metro
 import android.app.Activity
 import android.app.Service
 import androidx.fragment.app.Fragment
-import com.pmm.metro.annotatoin.StationType
 import com.pmm.metro.transfer.Transfer
 
 /**

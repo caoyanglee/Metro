@@ -1,7 +1,7 @@
 package com.pmm.metro.lanuncher
 
 import com.pmm.metro.StationMeta
-import com.pmm.metro.annotatoin.StationType
+import com.pmm.metro.StationType
 import com.pmm.metro.Ticket
 
 /**
