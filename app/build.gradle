@@ -19,8 +19,6 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    //kotlin annotation process tool
-    kapt { generateStubs = true }
     lintOptions { abortOnError false }
 
     buildTypes {
