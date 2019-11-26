@@ -59,7 +59,7 @@ allprojects {
     }
 }
 ```
-**app的build.gradle**
+**具体模块的build.gradle，例如app.gradle**
 [![](https://jitpack.io/v/caoyanglee/Metro.svg)](https://jitpack.io/#caoyanglee/Metro)
 
 ```gradle
