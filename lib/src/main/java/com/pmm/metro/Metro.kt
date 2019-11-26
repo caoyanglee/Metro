@@ -84,7 +84,10 @@ object Metro {
      * 扫描所有代理有@Staion的类，并返回Map集合
      * 此方法适合小项目，类少！
      * 大项目建议使用MetroMap.addStation()手动添加
+     *
+     * 已经启用，运行时反射耗性能，现换成编译期生成路由配置文件
      */
+    @Deprecated("runtime reflection is consumption performance,now we generate route config file at the compile time")
     private fun scan(context: Context): List<StationMeta> {
         val stationsList = arrayListOf<StationMeta>()
         try {
