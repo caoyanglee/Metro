@@ -181,7 +181,7 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
     }
 
     //开启Activity
-    fun go(requestCode: Int = -1) = activityLauncher().go()
+    fun go(requestCode: Int = -1) = activityLauncher().go(requestCode)
 
     //转换Activity
     fun activityLauncher(): ActivityLauncher {
