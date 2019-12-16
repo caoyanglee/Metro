@@ -3,7 +3,7 @@
 [![](https://jitpack.io/v/caoyanglee/Metro.svg)](https://jitpack.io/#caoyanglee/Metro)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 <br>
-🚇地铁 一款简单的路由库
+🚇地铁 一款简单的Kotlin路由库
 
 ## 用法
 **添加站点**
