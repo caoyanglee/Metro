@@ -83,13 +83,14 @@ allprojects {
 }
 ```
 **具体模块的build.gradle，例如app.gradle**
+> 注意：默认使用kotlin1.3.60版本的库
 [![](https://jitpack.io/v/caoyanglee/Metro.svg)](https://jitpack.io/#caoyanglee/Metro)
 
 ```gradle
 //Kapt插件，必须！
 apply plugin: 'kotlin-kapt'
 
-//生成的文件为UUID命名，若要让生成文件明确模块，可加入一下操作
+//生成的文件为UUID命名，若要让生成文件明确模块，可加入以下操作
 kapt {
     arguments {
         arg("metroModuleName", project.getName())
@@ -101,7 +102,7 @@ dependencies {
     //库本体只要在底层模块依赖一次即可
     implementation 'com.github.caoyanglee.Metro:lib:{latestVersion}'
 
-    //在需要的模块下，使用注解处理器
+    //在需要路由功能的模块下，使用注解处理器
     kapt 'com.github.caoyanglee.Metro:compiler:{latestVersion}'
 }
 
