@@ -109,6 +109,7 @@ allprojects {
 ```
 **具体模块的build.gradle，例如app.gradle**
 > 注意：默认使用kotlin1.3.60版本的库
+
 [![](https://jitpack.io/v/caoyanglee/Metro.svg)](https://jitpack.io/#caoyanglee/Metro)
 
 ```gradle
