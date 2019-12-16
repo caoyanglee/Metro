@@ -46,6 +46,29 @@ MetroMap.addTransferStation(object : Transfer {
     }
 })
 ```
+```kotlin
+//登录拦截器
+class UserAuthTransfer : Transfer {
+
+    override fun transfer(chain: Transfer.Chain): Ticket {
+        val ticket = chain.ticket()
+        if (needLogin(ticket.path)) {
+            ticket.clear()
+            ticket.path = "/account/login"
+            ticket.overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.noting)
+        }
+        return chain.proceed(ticket)
+    }
+
+    private fun needLogin(path: String) = when {
+        path.isBlank() -> false
+        //增加需要校验登录权限的页面
+        path.startsWith("/main") -> true
+        else -> false
+    }
+
+}
+```
 
 ## 获取依赖
 
