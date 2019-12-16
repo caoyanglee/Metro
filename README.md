@@ -6,7 +6,15 @@
 🚇地铁 一款简单的Kotlin路由库
 
 ## 用法
-**添加站点**
+
+**初始化**
+```kotlin  
+//在Application中
+Metro.init(this)
+```
+
+**添加站点** 
+> 注意：站点现支持Activity，Service，Fragment
 
 1. 注解方式
 ```kotlin
@@ -20,20 +28,37 @@ class MainActivity{}
 MetroMap.addStation("/main", MainActivity::class.java)
 ```
 
-
 **跳转**
 ```kotlin
+//跳转到Activity
 Metro.with(this)
     .path("/main")
     .put("currIndex", 1)
     .go()
+    
+//跳转到Service
+Metro.with(this)
+    .path("/main")
+    .serviceLauncher()
+    .go()
+
+//跳转到Fragment
+Metro.with(this)
+    .path("/main")
+    .fragmentLauncher()
+    .go()
 ```
 
-**初始化**
-```kotlin  
-//在Application中
-Metro.init(this)
+**错误回调**
+```kotlin 
+Metro.with(this)
+    .path("/main")
+    .fail {
+        Log.e("metro", it.toString())
+    }
+    .go()
 ```
+
 **拦截器**
 ```kotlin
 //增加中转站（类似拦截器）
