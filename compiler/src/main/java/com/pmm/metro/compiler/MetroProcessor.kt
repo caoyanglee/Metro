@@ -65,10 +65,10 @@ class MetroProcessor : AbstractProcessor() {
             val station: Station = it.getAnnotation(Station::class.java)
             rootMap.add(Pair(station.path, te))
 
-            this.messager?.printMessage(
-                Diagnostic.Kind.WARNING,
-                "=============> 路径=${station.path} 类=${te.asClassName()}}"
-            )
+//            this.messager?.printMessage(
+//                Diagnostic.Kind.WARNING,
+//                "=============> 路径=${station.path} 类=${te.asClassName()}}"
+//            )
         }
 
         for ((path, te) in rootMap) {
