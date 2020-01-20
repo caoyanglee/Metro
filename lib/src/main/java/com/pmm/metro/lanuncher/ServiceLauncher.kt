@@ -3,7 +3,9 @@ package com.pmm.metro.lanuncher
 import android.app.Activity
 import android.content.Context
 import android.content.ServiceConnection
+import android.os.Build
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.pmm.metro.StationMeta
 import com.pmm.metro.Ticket
@@ -19,7 +21,7 @@ class ServiceLauncher(
     driver: Any
 ) : AbstractLauncher(station, ticket, driver) {
 
-    //开启Service
+    //开启Service 后台
     fun go() {
         if (station == null) return
         val intent = ticket.intent
@@ -54,6 +56,25 @@ class ServiceLauncher(
             }
             is Context -> {
                 driver.bindService(intent.setClass(driver, station.destination), conn, flags)
+            }
+        }
+    }
+
+    //开启Service 前台
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun goForeground() {
+        if (station == null) return
+        val intent = ticket.intent
+        when (driver) {
+            is Activity -> {
+                driver.startForegroundService(intent.setClass(driver, station.destination))
+            }
+            is Fragment -> {
+                val target = driver.requireActivity()
+                target.startForegroundService(intent.setClass(target, station.destination))
+            }
+            is Context -> {
+                driver.startForegroundService(intent.setClass(driver, station.destination))
             }
         }
     }
