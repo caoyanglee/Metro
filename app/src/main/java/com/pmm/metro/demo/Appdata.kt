@@ -21,8 +21,8 @@ class AppData : OriginAppData() {
     }
 
     private fun MetroConfig() {
-        val time1 = measureTimeMillis{ Metro.init(this, true) }
-        val time2 =measureTimeMillis{ Metro.loadConfigClass("com.pmm.metro.route.MetroRoute_app") }
+        val time1 = measureTimeMillis{ Metro.init(this, false) }
+        val time2 =measureTimeMillis{ Metro.loadConfigClass("MetroRoute_app") }
 
         Log.d("timeTest","time1=$time1")
         Log.d("timeTest","time2=$time2")

@@ -98,11 +98,11 @@ object Metro {
     /**
      * load config class
      * 加载配置类
-     * @param className full class name with package path,
+     * @param className class name 类名
      */
     fun loadConfigClass(className: String) {
         if (BuildConfig.DEBUG) Log.d("metro", "className_$className")
-        val clazz = Class.forName(className)
+        val clazz = Class.forName("com.pmm.metro.route.$className")
         val method = clazz.getMethod("loadRouter")
         method.invoke(null)
     }

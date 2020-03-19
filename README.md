@@ -116,7 +116,7 @@ allprojects {
 //Kapt插件，必须！
 apply plugin: 'kotlin-kapt'
 
-//生成的文件为UUID命名，若要让生成文件明确模块，可加入以下操作
+//生成的路由配置类为UUID命名，若要让生成路由配置类明确模块，可加入以下操作
 kapt {
     arguments {
         arg("metroModuleName", project.getName())
@@ -133,3 +133,17 @@ dependencies {
 }
 
 ```
+
+## 优化建议
+在Application中的`Metro.init(this)`，默认会加载所有路由配置文件，因为是自动扫描所以是耗时操作，我们建议做以下优化
+
+```kotlin  
+Metro.init(
+    context = this,
+    autoLoadConfigClass = false //不在使用自动加载
+    )
+//指定加载路由配置文件，速度快
+Metro.loadConfigClass("MetroRoute_xxx")
+```
+
+PS:路由配置文件生成的位置在各个moduel的`build/generated/source/kaptKotlin/debug`中，每个配置类对应的包名都是`com.pmm.metro.route`,唯一不同的是类名。
