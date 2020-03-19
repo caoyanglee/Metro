@@ -54,10 +54,18 @@ object Metro {
      * init the lib
      *
      * 初始化库
+     *
+     * @param autoLoadConfigClass 自动加载配置文件
+     *
+     * autoScanConfigClass is not good solution to load configClass,it is expensive operations,not advice
+     * advice you to use loadConfigClass() to load configClass directly!
+     *
+     * 自动加载配置文件不是一个好方式去加载配置文件，它非常耗时，不建议使用
+     * 建议你使用 loadConfigClass() 直接加载配置文件
      */
-    fun init(context: Application) {
+    fun init(context: Application, autoLoadConfigClass: Boolean = true) {
         this.context = context
-        scanMetroRoute(context)
+        if (autoLoadConfigClass) scanMetroRoute(context)
     }
 
     /**
@@ -75,7 +83,7 @@ object Metro {
             while (inter.hasMoreElements()) {
                 val className: String = inter.nextElement()
                 if (className.matches(regExp)) {
-                    Log.d("metro","className_$className")
+                    if (BuildConfig.DEBUG) Log.d("metro", "className_$className")
                     val clazz = Class.forName(className)
                     val method = clazz.getMethod("loadRouter")
                     method.invoke(null)
@@ -83,7 +91,20 @@ object Metro {
             }
         } catch (e: IOException) {
             e.printStackTrace()
+
         }
+    }
+
+    /**
+     * load config class
+     * 加载配置类
+     * @param className full class name with package path,
+     */
+    fun loadConfigClass(className: String) {
+        if (BuildConfig.DEBUG) Log.d("metro", "className_$className")
+        val clazz = Class.forName(className)
+        val method = clazz.getMethod("loadRouter")
+        method.invoke(null)
     }
 
     /**

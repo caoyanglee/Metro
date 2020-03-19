@@ -4,6 +4,7 @@ import android.util.Log
 import com.pmm.metro.*
 import com.pmm.metro.transfer.Transfer
 import com.pmm.ui.OriginAppData
+import kotlin.system.measureTimeMillis
 
 /**
  * Author:你需要一台永动机
@@ -20,7 +21,11 @@ class AppData : OriginAppData() {
     }
 
     private fun MetroConfig() {
-        Metro.init(this)
+        val time1 = measureTimeMillis{ Metro.init(this, true) }
+        val time2 =measureTimeMillis{ Metro.loadConfigClass("com.pmm.metro.route.MetroRoute_app") }
+
+        Log.d("timeTest","time1=$time1")
+        Log.d("timeTest","time2=$time2")
 
         //中转站
         MetroMap.addTransfer(object : Transfer {
