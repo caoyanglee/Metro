@@ -4,14 +4,15 @@ import android.app.Activity
 import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.pmm.metro.Metro
-import com.pmm.metro.Station
+import com.pmm.metro.annotatoin.Station
 import com.pmm.metro.demo.transfer.UserCheckTransfer
-import com.weimu.universalview.ktx.setOnClickListenerPro
-import com.weimu.universalview.ktx.toast
+import com.pmm.ui.ktx.click
+import com.pmm.ui.ktx.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 @Station("/main")
@@ -25,30 +26,34 @@ class MainActivity : AppCompatActivity() {
 
         val url = "http://www.baidu.com"
 
-        mTvJump.setOnClickListenerPro {
+        mTvJump.click {
             Metro.with(this)
                 .path("/a?name=你需要一台永动机&age=27&url=$url")
                 .addTransfer(UserCheckTransfer())
+                .fail {
+                    Log.e("metro", it.toString())
+                }
                 .go()
         }
 
-        mBtnService.setOnClickListenerPro {
+        mBtnService.click {
             startServices()
         }
 
-        mBtnGetName.setOnClickListenerPro {
+        mBtnGetName.click {
             toast("${testService?.getName()}")
         }
 
-        mBtnFragment.setOnClickListenerPro {
-            Metro.with(this).path("/fragment/test")
-                .attribute("id", 3)
-                .attribute("name", "你需要一台永动机")
-                .direct2Fragment()
+        mBtnFragment.click {
+            Metro.with(this)
+                .path("/fragment/test")
+                .put("id", 3)
+                .put("name", "你需要一台永动机")
+                .fragmentLauncher()
                 .go()
         }
 
-        mBtnFail.setOnClickListenerPro {
+        mBtnFail.click {
             Metro.with(this)
                 .path("/webview")
                 .fail { toast(it.message.toString()) }
@@ -70,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
         Metro.with(this)
             .path("/service/test")
-            .direct2Service()
+            .serviceLauncher()
             .go()
 //        startService(Intent(this, TestService::class.java))
 //        bindService(Intent(this, TestService::class.java), conn, Context.BIND_AUTO_CREATE)

@@ -3,11 +3,11 @@ package com.pmm.metro.ui
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutCompat
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.fragment.app.Fragment
 import com.pmm.metro.R
 
 /**

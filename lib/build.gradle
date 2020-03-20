@@ -4,10 +4,10 @@ apply plugin: 'kotlin-android'
 // JitPack Maven
 apply plugin: 'com.github.dcendents.android-maven'
 // Your Group
-group='com.github.caoyanglee'
+group = 'com.github.caoyanglee'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion versions.compileSdk
 
     defaultConfig {
         minSdkVersion versions.minSdk
@@ -29,9 +29,12 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     //google
-    compile 'com.android.support:appcompat-v7:28.0.0'
+    compile 'androidx.appcompat:appcompat:1.1.0'
     //kt
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //annotation
+//    compile 'com.github.caoyanglee.Metro:annotation:0.2.32'
+    compile project(":annotation")
 }

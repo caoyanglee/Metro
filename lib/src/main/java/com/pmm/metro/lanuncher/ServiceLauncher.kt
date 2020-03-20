@@ -3,23 +3,29 @@ package com.pmm.metro.lanuncher
 import android.app.Activity
 import android.content.Context
 import android.content.ServiceConnection
-import android.support.v4.app.Fragment
+import android.os.Build
 import android.view.View
-import com.pmm.metro.Dispatcher
-import com.pmm.metro.StationType
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import com.pmm.metro.StationMeta
+import com.pmm.metro.Ticket
 
 /**
  * Author:你需要一台永动机
  * Date:2019-06-13 17:49
- * Description:
+ * Description: 启动Service
  */
-class ServiceLauncher(private val dispatcher: Dispatcher) {
+class ServiceLauncher(
+    station: StationMeta?,
+    ticket: Ticket,
+    driver: Any
+) : AbstractLauncher(station, ticket, driver) {
 
-    //开启Service
+    //开启Service 后台
     fun go() {
-        val station = dispatcher.getStation(StationType.SERVICE) ?: return
-        val intent = dispatcher.getTicket().intent
-        when (val driver = dispatcher.getDriver()) {
+        if (station == null) return
+        val intent = ticket.intent
+        when (driver) {
             is Activity -> {
                 driver.startService(intent.setClass(driver, station.destination))
             }
@@ -29,10 +35,6 @@ class ServiceLauncher(private val dispatcher: Dispatcher) {
             }
             is Context -> {
                 driver.startService(intent.setClass(driver, station.destination))
-            }
-            is View -> {
-                val target = driver.context
-                target.startService(intent.setClass(target, station.destination))
             }
         }
     }
@@ -42,9 +44,9 @@ class ServiceLauncher(private val dispatcher: Dispatcher) {
         conn: ServiceConnection,
         flags: Int = Context.BIND_AUTO_CREATE
     ) {
-        val station = dispatcher.getStation(StationType.SERVICE) ?: return
-        val intent = dispatcher.getTicket().intent
-        when (val driver = dispatcher.getDriver()) {
+        if (station == null) return
+        val intent = ticket.intent
+        when (driver) {
             is Activity -> {
                 driver.bindService(intent.setClass(driver, station.destination), conn, flags)
             }
@@ -55,9 +57,24 @@ class ServiceLauncher(private val dispatcher: Dispatcher) {
             is Context -> {
                 driver.bindService(intent.setClass(driver, station.destination), conn, flags)
             }
-            is View -> {
-                val target = driver.context
-                target.bindService(intent.setClass(target, station.destination), conn, flags)
+        }
+    }
+
+    //开启Service 前台
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun goForeground() {
+        if (station == null) return
+        val intent = ticket.intent
+        when (driver) {
+            is Activity -> {
+                driver.startForegroundService(intent.setClass(driver, station.destination))
+            }
+            is Fragment -> {
+                val target = driver.requireActivity()
+                target.startForegroundService(intent.setClass(target, station.destination))
+            }
+            is Context -> {
+                driver.startForegroundService(intent.setClass(driver, station.destination))
             }
         }
     }

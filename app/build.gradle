@@ -3,6 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+kapt {
+    arguments {
+        arg("metroModuleName", project.getName())
+    }
+}
+
 android {
     compileSdkVersion versions.compileSdk
     defaultConfig {
@@ -13,8 +19,6 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    //kotlin annotation process tool
-    kapt { generateStubs = true }
     lintOptions { abortOnError false }
 
     buildTypes {
@@ -30,6 +34,7 @@ dependencies {
     //universal-ui
     implementation deps.core.ui
     implementation project(':lib')
+    kapt project(':compiler')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
