@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.pmm.metro.Metro
 import com.pmm.metro.annotatoin.Station
-import com.pmm.ui.ktx.click
-import com.pmm.ui.ktx.toast
 import kotlinx.android.synthetic.main.activity_a.*
 
 @Station("/a")

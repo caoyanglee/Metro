@@ -1,9 +1,10 @@
 package com.pmm.metro.demo
 
+import android.app.Application
 import android.util.Log
 import com.pmm.metro.*
 import com.pmm.metro.transfer.Transfer
-import com.pmm.ui.OriginAppData
+import kotlin.properties.Delegates
 import kotlin.system.measureTimeMillis
 
 /**
@@ -11,12 +12,17 @@ import kotlin.system.measureTimeMillis
  * Date:2019-05-14 14:40
  * Description:
  */
-class AppData : OriginAppData() {
+class AppData : Application() {
 
-    override fun isDebug(): Boolean = BuildConfig.DEBUG
+    //伴随对象
+    companion object {
+        var context: AppData by Delegates.notNull()
+    }
+
 
     override fun onCreate() {
         super.onCreate()
+        context = this
         MetroConfig()
     }
 
