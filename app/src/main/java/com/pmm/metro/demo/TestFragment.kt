@@ -34,7 +34,7 @@ class TestFragment : Fragment() {
         return getLayoutUI()
     }
 
-    private fun getLayoutUI(): ViewGroup? = LinearLayoutCompat(context).apply {
+    private fun getLayoutUI(): ViewGroup? = LinearLayoutCompat(requireContext()).apply {
         orientation = LinearLayoutCompat.VERTICAL
         addView(TextView(context).apply {
             text = "测试信号"
