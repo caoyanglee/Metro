@@ -134,6 +134,13 @@ dependencies {
 
 ```
 
+## 混淆
+```
+#Metro
+-keep class com.pmm.metro.**{*;}
+-keepnames class com.pmm.metro.**{*;}
+```
+
 ## 优化建议
 在Application中的`Metro.init(this)`，默认会加载所有路由配置文件，因为是自动扫描所以是耗时操作，我们建议做以下优化
 
