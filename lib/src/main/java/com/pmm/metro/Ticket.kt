@@ -163,6 +163,14 @@ class Ticket(path: String) {
         this.exitAnim = exitAnim
     }
 
+    fun addFlags(flags: Int) = this.apply {
+        this.intent.addFlags(flags)
+    }
+
+    fun addCategory(category: String) = this.apply {
+        this.intent.addCategory(category)
+    }
+
     private fun clearOverridePendingTransition() = this.apply {
         this.enterAnim = 0
         this.exitAnim = 0

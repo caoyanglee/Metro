@@ -152,6 +152,18 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
         ticket.overridePendingTransition(enterAnim, exitAnim)
     }
 
+    fun addFlags(flags: Int) = this.apply {
+        ticket.addFlags(flags)
+    }
+
+    fun singleTop()=this.apply {
+        ticket.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+    }
+
+    fun addCategory(category: String) = this.apply {
+        ticket.addCategory(category)
+    }
+
     //获取中转处理后的票
     private fun getTicketAfterTransfer(): Ticket {
         val transfers = arrayListOf<Transfer>()
@@ -181,7 +193,8 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
     }
 
     //开启Activity
-    fun go(requestCode: Int = -1, options: Bundle? = null) = activityLauncher().go(requestCode,options)
+    fun go(requestCode: Int = -1, options: Bundle? = null) =
+        activityLauncher().go(requestCode, options)
 
     //转换Activity
     fun activityLauncher(): ActivityLauncher {

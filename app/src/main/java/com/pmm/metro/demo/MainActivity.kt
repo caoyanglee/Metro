@@ -15,8 +15,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 @Station("/main")
 class MainActivity : AppCompatActivity() {
+    private val TAG = "main"
 
     private var testService: TestService.TestBinder? = null
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        Log.e(TAG, "onNewIntent: ")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         mTvJump.click {
             Metro.with(this)
                 .path("/a?name=你需要一台永动机&age=27&url=$url")
-                .addTransfer(UserCheckTransfer())
+                //.addTransfer(UserCheckTransfer())
                 .fail {
                     Log.e("metro", it.toString())
                 }

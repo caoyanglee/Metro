@@ -10,7 +10,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AActivity">
+        <activity android:name=".AActivity"
+            >
         </activity>
         <activity android:name=".BActivity">
         </activity>
