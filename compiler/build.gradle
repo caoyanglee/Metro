@@ -18,5 +18,7 @@ dependencies {
     compile 'com.squareup:kotlinpoet:1.6.0'
 }
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
