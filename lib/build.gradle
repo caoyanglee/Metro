@@ -4,9 +4,20 @@ plugins {
     id 'maven-publish'//JitPack
 }
 
-// Your Group
-group = 'com.github.caoyanglee'
-version = '1.0.0'
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.caoyanglee'
+            artifactId = 'lib'
+            version = '0.3.3'
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+}
+
 
 android {
     compileSdkVersion versions.compileSdk

@@ -5,9 +5,19 @@ plugins {
     id 'maven-publish'//JitPack
 }
 
-// Your Group
-group = 'com.github.caoyanglee'
-version = '1.0.0'
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'com.github.caoyanglee'
+            artifactId = 'compiler'
+            version = '0.3.3'
+
+            afterEvaluate {
+                from components.java
+            }
+        }
+    }
+}
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
