@@ -156,7 +156,7 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
         ticket.addFlags(flags)
     }
 
-    fun singleTop()=this.apply {
+    fun singleTop() = this.apply {
         ticket.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
     }
 
@@ -221,4 +221,7 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
     fun fail(failCallback: ((e: Exception) -> Unit)) = this.apply {
         this.failCallback = failCallback
     }
+
+    //获取Intent
+    fun getIntent() = ticket.intent
 }

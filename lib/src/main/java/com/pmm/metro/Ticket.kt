@@ -12,7 +12,8 @@ import java.io.Serializable
  */
 class Ticket(path: String) {
 
-    val intent: Intent by lazy { Intent() }
+    var intent: Intent = Intent()
+        private set
     var enterAnim = 0//进入动画
     var exitAnim = 0//退出动画
 
