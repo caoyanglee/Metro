@@ -221,7 +221,4 @@ class TrainDispatcher(private var ticket: Ticket, private val driver: Any) {
     fun fail(failCallback: ((e: Exception) -> Unit)) = this.apply {
         this.failCallback = failCallback
     }
-
-    //获取Intent
-    fun getIntent() = ticket.intent
 }

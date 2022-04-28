@@ -68,4 +68,23 @@ class FragmentLauncher(
             }
         }
     }
+
+    //生成Intent
+    fun generateIntent(): Intent? {
+        if (station == null) return null
+        val intent = ticket.intent
+
+        FragmentAy.fragment = (station.destination.newInstance() as Fragment).apply {
+            arguments = intent.extras
+        }
+
+        when (driver) {
+            is Activity -> intent.setClass(driver, FragmentAy::class.java)
+            is Fragment -> intent.setClass(driver.requireContext(), FragmentAy::class.java)
+            is Context -> intent.setClass(driver, FragmentAy::class.java).apply {
+                this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+        }
+        return intent
+    }
 }

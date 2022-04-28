@@ -63,4 +63,21 @@ class ActivityLauncher(
             }
         }
     }
+
+    //生成Intent
+    fun generateIntent(): Intent? {
+        if (station == null) return null
+        val intent = ticket.intent
+
+        when (driver) {
+            is Activity -> intent.setClass(driver, station.destination)
+            is Fragment -> intent.setClass(driver.requireContext(), station.destination)
+            is Context -> intent.setClass(driver, station.destination).apply {
+                this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+        }
+        return intent
+    }
+
+
 }

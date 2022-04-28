@@ -2,6 +2,7 @@ package com.pmm.metro.lanuncher
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Build
 import android.view.View
@@ -77,5 +78,18 @@ class ServiceLauncher(
                 driver.startForegroundService(intent.setClass(driver, station.destination))
             }
         }
+    }
+
+    //生成Intent
+    fun generateIntent(): Intent? {
+        if (station == null) return null
+        val intent = ticket.intent
+
+        when (driver) {
+            is Activity -> intent.setClass(driver, station.destination)
+            is Fragment -> intent.setClass(driver.requireActivity(), station.destination)
+            is Context -> intent.setClass(driver, station.destination)
+        }
+        return intent
     }
 }
