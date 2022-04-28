@@ -43,7 +43,8 @@ dependencies {
 
     implementation project(':lib')
     kapt project(':compiler')
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //test
+    testImplementation deps.core.test.junit
+    androidTestImplementation deps.core.test.ext
+    androidTestImplementation deps.core.test.expresso
 }

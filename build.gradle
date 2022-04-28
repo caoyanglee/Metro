@@ -10,7 +10,12 @@ buildscript {
     //依赖
     ext.deps = [
             'core'     : [
-                    'ui'         : 'com.github.caoyanglee:universalui:0.7.0'
+                    'ui'         : 'com.github.caoyanglee:universalui:0.7.0',
+                    'test': [
+                            'junit'   : 'junit:junit:4.13.2',
+                            'ext'     : 'androidx.test.ext:junit:1.1.3',
+                            'expresso': 'androidx.test.espresso:espresso-core:3.4.0'
+                    ]
             ]
     ]
     //常规

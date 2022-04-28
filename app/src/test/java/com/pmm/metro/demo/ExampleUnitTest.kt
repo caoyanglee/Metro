@@ -1,10 +1,6 @@
 package com.pmm.metro.demo
 
-import android.util.Log
-import com.orhanobut.logger.Logger
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).

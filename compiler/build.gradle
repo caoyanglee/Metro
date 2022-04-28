@@ -10,8 +10,6 @@ group = 'com.github.caoyanglee'
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    //jitpack
-    api 'com.github.jitpack:android-example:1.0.1'
     //core
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //annotation
