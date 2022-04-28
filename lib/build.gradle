@@ -7,9 +7,9 @@ plugins {
 publishing {
     publications {
         release(MavenPublication) {
-            groupId = 'com.github.caoyanglee'
+            groupId = project.groupId
             artifactId = 'lib'
-            version = '0.3.3'
+            version = project.version
 
             afterEvaluate {
                 from components.release

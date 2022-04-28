@@ -7,9 +7,9 @@ plugins {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = 'com.github.caoyanglee'
+            groupId = project.groupId
             artifactId = 'annotation'
-            version = '0.3.3'
+            version = project.version
 
             afterEvaluate {
                 from components.java
