@@ -6,6 +6,7 @@ plugins {
 
 // Your Group
 group = 'com.github.caoyanglee'
+version = '1.0.0'
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
